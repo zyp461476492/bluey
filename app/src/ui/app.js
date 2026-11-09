@@ -94,6 +94,8 @@ export function createApp(doc) {
     total: 0,
     lang: CONFIG.DEFAULT_LANG,
     tts: true,
+    rate: 'normal',
+    countdown: 'auto',
     current: null
   });
 
@@ -152,6 +154,14 @@ export function createApp(doc) {
       store.set({ tts: on });
       writeStore(CONFIG.STORAGE_KEYS.tts, on);
       if (!on) stopSpeech();
+    },
+    onRate: function (rate) {
+      store.set({ rate: rate });
+      writeStore(CONFIG.STORAGE_KEYS.ttsRate, rate);
+    },
+    onCountdown: function (val) {
+      store.set({ countdown: val });
+      writeStore(CONFIG.STORAGE_KEYS.countdown, val);
     },
     onTheme: function (id) {
       applyTheme(id);
@@ -216,6 +226,17 @@ export function createApp(doc) {
     return p ? p.mode : 'reveal';
   }
 
+  /**
+   * 倒计时时长：设置里选了具体秒数就用它，否则跟年龄档。
+   * 全部夹在 CONFIG.COUNTDOWN_MIN/MAX 之间，防止存了非法值把流程卡死。
+   */
+  function resolveCountdownMs(p) {
+    const saved = store.get().countdown;
+    let ms = saved === 'auto' || saved == null ? (p.revealDelayMs || CONFIG.COUNTDOWN_MS) : Number(saved);
+    if (!isFinite(ms) || ms <= 0) ms = CONFIG.COUNTDOWN_MS;
+    return Math.min(CONFIG.COUNTDOWN_MAX, Math.max(CONFIG.COUNTDOWN_MIN, ms));
+  }
+
   function render(state) {
     els.root.setAttribute('data-status', state.status);
     els.root.setAttribute('data-mode', state.profile ? state.profile.mode : 'reveal');
@@ -274,7 +295,12 @@ export function createApp(doc) {
 
     maybeWarnNoEnglish();
 
-    const rate = s.profile && s.profile.ttsRate ? s.profile.ttsRate : CONFIG.TTS.rate;
+    // 语速 = 年龄档基础语速 × 设置档倍率，限制在 [rateMin, rateMax]
+    const base = s.profile && s.profile.ttsRate ? s.profile.ttsRate : CONFIG.TTS.rate;
+    const levels = CONFIG.TTS.rateLevels;
+    const mul = (s.rate && levels[s.rate]) || levels.normal;
+    let rate = base * mul;
+    rate = Math.min(CONFIG.TTS.rateMax, Math.max(CONFIG.TTS.rateMin, rate));
 
     speech.cancel();
     els.speakBtn.setAttribute('data-playing', 'true');
@@ -326,7 +352,7 @@ export function createApp(doc) {
     setStatus(STATES.COUNTDOWN);
     els.cardBtn.setAttribute('aria-label', t('revealHint'));
     countdown.show();
-    countdown.start(p.revealDelayMs || CONFIG.COUNTDOWN_MS);
+    countdown.start(resolveCountdownMs(p));
 
     // 焦点默认落在卡片上：遥控器按 Enter 就是"立即揭晓"
     if (p.mode !== 'quiz') focusEl(els.cardBtn);
@@ -516,6 +542,10 @@ export function createApp(doc) {
     settings.show({
       lang: s.lang,
       tts: s.tts !== false,
+      rate: s.rate || 'normal',
+      countdown: s.countdown === undefined ? 'auto' : s.countdown,
+      // flashcard 模式没有倒计时，这行没意义，不显示
+      showCountdown: modeOf() !== 'flashcard',
       ageLabel: s.profile ? labelOf(s.profile) : '—',
       categoryLabel: catLabel,
       theme: getTheme()
@@ -643,6 +673,10 @@ export function createApp(doc) {
         const savedLang = readStore(CONFIG.STORAGE_KEYS.lang, null);
         const langOk = savedLang === 'both' || savedLang === 'zh' || savedLang === 'en';
         const savedTts = readStore(CONFIG.STORAGE_KEYS.tts, null);
+        const savedRate = readStore(CONFIG.STORAGE_KEYS.ttsRate, null);
+        const rateOk = savedRate === 'slow' || savedRate === 'normal' || savedRate === 'fast';
+        const savedCd = readStore(CONFIG.STORAGE_KEYS.countdown, null);
+        const cdOk = savedCd === 'auto' || CONFIG.COUNTDOWN_CHOICES.indexOf(savedCd) >= 0;
 
         store.set({
           profiles: profiles,
@@ -651,7 +685,9 @@ export function createApp(doc) {
           categories: categories,
           categoryId: catOk ? savedCat : 'all',
           lang: langOk ? savedLang : CONFIG.DEFAULT_LANG,
-          tts: savedTts === null ? true : !!savedTts
+          tts: savedTts === null ? true : !!savedTts,
+          rate: rateOk ? savedRate : 'normal',
+          countdown: cdOk ? savedCd : 'auto'
         });
         updateCategoryBtn();
 

@@ -128,12 +128,10 @@ app/
     hint: { zh, en },
     options: [ {en,zh,correct:true}, ... ]              // 仅 quiz 模式，已打乱
   },
-  settings: {
-    mode: 'reveal' | 'quiz',
-    lang: 'zh' | 'en' | 'both',
-    countdownMs: 5000,
-    ttsEnabled: true
-  },
+  lang: 'zh' | 'en' | 'both',   // 答案展示与朗读语言
+  tts: true,                    // 发音开关
+  rate: 'slow' | 'normal' | 'fast',   // 语速档，乘在年龄档 ttsRate 上（02 F5-5）
+  countdown: 'auto' | 3000 | 5000 | 8000, // 'auto' = 跟年龄档 revealDelayMs（02 F5-3）
   progress: { seenIds: [], masteredIds: [] }
 }
 ```

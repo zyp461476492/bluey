@@ -53,7 +53,7 @@
 | 电视 overscan 裁切边缘 | 布局四周留 5% 安全区 |
 | 揭晓瞬间布局跳动会让孩子丢视线 | 答案区提前占位，用 `visibility` 而非 `display` 切换 |
 | `outline: none` | 绝对禁止，TV 上等于遥控器完全不可用 |
-| **Chrome on Windows 最小窗口宽约 504px** | `--window-size=390` 布局按 504 算，量手机效果是假的 → 用 `tools/viewport-check.html` 的 iframe |
+| **Chrome on Windows 最小窗口宽约 504px** | `--window-size=390` 布局按 504 算（探针实测 innerWidth=504），量手机效果是假的 → 用 iframe 控宽：`viewport-check.html` 或 `flow-check.html?vw=390&vh=844` |
 | **长文本撑宽 CSS Grid** | 会把卡片挤出屏幕；栅格项必须加 `min-width: 0`，列用 `minmax(0,1fr)` |
 | 自动聚焦按钮会常驻焦点环 | 触摸端看着像装饰边框；改为全局 keydown 兜住确认键，不主动 focus 卡片 |
 | iframe + virtual-time 截图 | CSS transition 会卡在半透明，**布局可信、颜色不可信**；颜色要直接截页面 |
@@ -71,6 +71,7 @@
 | **本机语音实况（2026-11-09）** | 系统 Win11 26300；已装语言 zh-Hans-CN + **en-US，但 en-US 的「语音」组件未装**（OneCore 零英文语音）；SAPI5 有 Zira(en-US) 但 Chrome 用不上 |
 | **CSS Grid 的 `1fr` 最小值是 min-content** | 图片固有高度会把行撑开、整页溢出错位 → 必须写 `minmax(0, 1fr)` |
 | 浮层遮罩不能写死深色 | 浅色主题下 title 用深色文字 → 深底深字看不见；用 `--overlay-bg` 跟主题 |
+| **reduced-motion 不能一刀切把 `--dur-*` 置 1ms** | 那会把"纯淡入"也杀掉；正确做法：动效走独立 token（`--dur-reveal`），reduced-motion 里只去掉 transform/animation、保留 opacity 过渡 |
 | headless 默认浅色 | `prefers-color-scheme` 在无头 Chrome 是 light，截深色图要显式写 localStorage |
 | **无头 Chrome 其实有语音** | 实测 22 个语音含 `Google UK English Female (en-GB)`；之前测出 0 个是**测太早**（语音列表异步加载） |
 | **emoji 占位是正式通道** | `media.type:"emoji"` 时不发图片请求，词条可以先落地，不产生 404/骨架屏 |

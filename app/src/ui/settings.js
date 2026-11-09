@@ -6,7 +6,7 @@
  * 每行高度足够遥控器操作。
  *
  * 行类型只有两种，够用且好维护：
- *   segment —— 横向单选（语言、发音开关）
+ *   segment —— 横向单选（语言、发音开关、语速、倒计时、主题外观）
  *   link    —— 一行可点，右侧显示当前值（跳去选年龄、选主题）
  */
 
@@ -86,6 +86,9 @@ export function createSettings(o) {
    * @param {object} s
    * @param {string} s.lang        'both' | 'zh' | 'en'
    * @param {boolean} s.tts
+   * @param {string} s.rate        'slow' | 'normal' | 'fast'
+   * @param {string|number} s.countdown  'auto' | 3000 | 5000 | 8000
+   * @param {boolean} s.showCountdown    flashcard 模式无倒计时，不显示该行
    * @param {string} s.ageLabel
    * @param {string} s.categoryLabel
    */
@@ -114,6 +117,33 @@ export function createSettings(o) {
         o.onTts(id === 'on');
       }
     );
+
+    addSegment(
+      o.t('setRate'),
+      [
+        { id: 'slow', label: o.t('rateSlow') },
+        { id: 'normal', label: o.t('rateNormal') },
+        { id: 'fast', label: o.t('rateFast') }
+      ],
+      s.rate,
+      o.onRate
+    );
+
+    if (s.showCountdown !== false) {
+      addSegment(
+        o.t('setCd'),
+        [
+          { id: 'auto', label: o.t('cdAuto') },
+          { id: '3000', label: o.t('cdSeconds', { n: 3 }) },
+          { id: '5000', label: o.t('cdSeconds', { n: 5 }) },
+          { id: '8000', label: o.t('cdSeconds', { n: 8 }) }
+        ],
+        String(s.countdown),
+        function (id) {
+          o.onCountdown(id === 'auto' ? 'auto' : Number(id));
+        }
+      );
+    }
 
     addSegment(
       o.t('theme'),

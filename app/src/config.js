@@ -23,9 +23,16 @@ export const CONFIG = {
     // 英文用英式，与词条里的音标（RP）保持一致
     langs: { en: 'en-GB', zh: 'zh-CN' },
     rate: 0.85,
+    // 语速档：乘在年龄档 ttsRate 上（docs/02 F5-5）
+    rateLevels: { slow: 0.8, normal: 1, fast: 1.25 },
+    rateMin: 0.5,
+    rateMax: 1.5,
     // 揭晓后的朗读顺序：先英文再中文
     order: ['en', 'zh']
   },
+
+  // 倒计时档（设置面板可选，docs/02 F5-3）。'auto' = 跟年龄档 revealDelayMs
+  COUNTDOWN_CHOICES: ['auto', 3000, 5000, 8000],
 
   // 主题
   THEMES: ['dark', 'light'],
@@ -51,6 +58,8 @@ export const CONFIG = {
     age: 'bluey.age.v1',
     lang: 'bluey.lang.v1',
     tts: 'bluey.tts.v1',
+    ttsRate: 'bluey.tts-rate.v1',
+    countdown: 'bluey.countdown.v1',
     category: 'bluey.category.v1'
   }
 };

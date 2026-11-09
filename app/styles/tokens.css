@@ -46,6 +46,9 @@
   /* 动效 */
   --dur-fast: 160ms;
   --dur-base: 280ms;
+  /* 揭晓动效总时长（图片微放大 + 答案淡入上移，docs/02 F1-8）。
+     单独一个变量是为了 reduced-motion 时能保留淡入、只去掉位移 */
+  --dur-reveal: 300ms;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* 层级 */

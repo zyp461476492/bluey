@@ -14,11 +14,15 @@
        flow-check.html?age=school&flow=quiz
        flow-check.html?age=school&flow=complete
        flow-check.html?flow=reveal&theme=light
+       flow-check.html?flow=settings&vw=390&vh=844   ← 精确视口（390 手机必用）
 
-     两个注意点：
-     1) 会把 --dur-base 改成 1ms —— headless 的虚拟时间不推进 CSS transition，
+     三个注意点：
+     1) 会把 --dur-* 改成 1ms —— headless 的虚拟时间不推进 CSS transition，
         不改的话截图里答案会卡在半透明（布局可信、颜色不可信）。
-     2) theme / age 参数会写 localStorage 再 reload 一次。 */
+     2) theme / age 参数会写 localStorage 再 reload 一次。
+     3) 不带 vw 时 iframe 占满窗口。但 Chrome on Windows 窗口最小宽约 504px，
+        --window-size=390 布局会按 504 算、截图只截 390px（右缘假裁切）。
+        要测 390 必须传 vw=390&vh=844，让 iframe 精确控宽（同 viewport-check 的做法）。 */
   html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
   iframe { display: block; width: 100vw; height: 100vh; border: 0; }
 </style>
@@ -31,8 +35,17 @@
   var theme = params.get('theme');
   var age = params.get('age');
   var cat = params.get('cat');
+  var vw = parseInt(params.get('vw'), 10);
+  var vh = parseInt(params.get('vh'), 10);
   var frame = document.getElementById('app');
   var presetApplied = false;
+
+  // 精确视口：用 iframe 控宽，绕开 Chrome 最小窗口宽度（见样式注释第 3 条）
+  if (vw > 0 && vh > 0) {
+    frame.style.width = vw + 'px';
+    frame.style.height = vh + 'px';
+    frame.style.margin = '0 auto';
+  }
 
   function wait(ms) {
     return new Promise(function (r) { setTimeout(r, ms); });
@@ -53,6 +66,7 @@
       var root = frame.contentDocument.documentElement;
       root.style.setProperty('--dur-base', '1ms');
       root.style.setProperty('--dur-fast', '1ms');
+      root.style.setProperty('--dur-reveal', '1ms');
     } catch (e) {}
   }
 

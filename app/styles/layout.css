@@ -157,13 +157,23 @@
   visibility: hidden;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+  /* 揭晓动效（docs/02 F1-8）：淡入上移，与图片微放大同一时长 */
+  transition: opacity var(--dur-reveal) var(--ease), transform var(--dur-reveal) var(--ease);
 }
 
 .answer[data-visible="true"] {
   visibility: visible;
   opacity: 1;
   transform: none;
+}
+
+/* reduced-motion：只保留淡入，去掉位移（docs/02 F1-8）。
+   注意不能用 tokens 里 --dur-* 全置 1ms 的办法 —— 那会把淡入也杀掉 */
+@media (prefers-reduced-motion: reduce) {
+  .answer {
+    transform: none;
+    transition: opacity var(--dur-reveal) var(--ease);
+  }
 }
 
 /* ---------- 手机竖屏：答案卡片改上下排列 ---------- */

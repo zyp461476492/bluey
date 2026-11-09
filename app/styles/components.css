@@ -19,14 +19,15 @@
   border: 1px solid var(--card-border);
   box-shadow: var(--card-shadow);
   overflow: hidden;
-  transition: transform var(--dur-base) var(--ease);
+  transition: transform var(--dur-reveal) var(--ease);
 }
 
 .card:disabled {
   cursor: default;
 }
 
-/* 揭晓时图片轻微放大，给一个"答案到了"的物理感 */
+/* 揭晓时图片轻微放大，给一个"答案到了"的物理感。
+   与答案淡入共用 --dur-reveal（docs/02 F1-8：总时长 300ms） */
 .app[data-status="ANSWER_SHOWN"] .card {
   transform: scale(1.02);
 }

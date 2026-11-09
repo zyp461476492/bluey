@@ -1,0 +1,36 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 日志与临时文件
+*.log
+tmp/
+temp/
+
+# 依赖（App 不用；Studio 用）
+node_modules/
+studio/web/dist/
+
+# Studio 工作数据（工作库与中转目录不入库，发布产物入 data/）
+studio/data/
+studio/outbox/
+studio/inbox/
+
+# WorkBuddy 本地缓存（memory 目录要纳入版本管理，不要忽略）
+.workbuddy/cache/
+.workbuddy/*.local
+
+# 大体积原始素材（保留压缩后的成品，原图不入库）
+assets/_raw/
+# 风格锚图（AI 生图的生产输入，不进产品）
+assets/_style/
+# 打样与对比产物（一次性，不进产品）
+assets/_pilot/
+# agent 产出待后处理的原图
+assets/_inbox/

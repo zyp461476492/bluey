@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "categoryId": "construction",
+  "items": [
+    {
+      "id": "construction-excavator-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/excavator.webp",
+        "alt": {
+          "zh": "一台黄色挖掘机",
+          "en": "A yellow excavator"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "excavator",
+        "ipa": "/ˈekskəveɪtə/",
+        "zh": "挖掘机",
+        "pinyin": "wā jué jī"
+      },
+      "speech": {
+        "en": "excavator",
+        "zh": "挖掘机"
+      },
+      "hint": {
+        "zh": "有个大铲斗，一下一下挖土",
+        "en": "It digs with a big bucket"
+      },
+      "distractors": [
+        {
+          "en": "bulldozer",
+          "zh": "推土机"
+        },
+        {
+          "en": "loader",
+          "zh": "装载机"
+        },
+        {
+          "en": "crane",
+          "zh": "吊车"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-bulldozer-002",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/bulldozer.webp",
+        "alt": {
+          "zh": "一台推土机",
+          "en": "A bulldozer"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "bulldozer",
+        "ipa": "/ˈbʊldəʊzə/",
+        "zh": "推土机",
+        "pinyin": "tuī tǔ jī"
+      },
+      "speech": {
+        "en": "bulldozer",
+        "zh": "推土机"
+      },
+      "hint": {
+        "zh": "前面一块大铁板，把土推走",
+        "en": "It pushes soil with a big blade"
+      },
+      "distractors": [
+        {
+          "en": "excavator",
+          "zh": "挖掘机"
+        },
+        {
+          "en": "loader",
+          "zh": "装载机"
+        },
+        {
+          "en": "road roller",
+          "zh": "压路机"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-road-roller-003",
+      "minAge": 3,
+      "difficulty": 3,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/road-roller.webp",
+        "alt": {
+          "zh": "一台压路机",
+          "en": "A road roller"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "road roller",
+        "ipa": "/rəʊd ˈrəʊlə/",
+        "zh": "压路机",
+        "pinyin": "yā lù jī"
+      },
+      "speech": {
+        "en": "road roller",
+        "zh": "压路机"
+      },
+      "hint": {
+        "zh": "前面有个大滚筒，把路压得平平的",
+        "en": "A big drum rolls the road flat"
+      },
+      "distractors": [
+        {
+          "en": "bulldozer",
+          "zh": "推土机"
+        },
+        {
+          "en": "excavator",
+          "zh": "挖掘机"
+        },
+        {
+          "en": "cement mixer",
+          "zh": "搅拌车"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-crane-004",
+      "minAge": 3,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/crane.webp",
+        "alt": {
+          "zh": "一台吊车",
+          "en": "A crane"
+        },
+        "fallbackEmoji": "🏗️"
+      },
+      "answer": {
+        "en": "crane",
+        "ipa": "/kreɪn/",
+        "zh": "吊车",
+        "pinyin": "diào chē"
+      },
+      "speech": {
+        "en": "crane",
+        "zh": "吊车"
+      },
+      "hint": {
+        "zh": "有长长的吊臂，把东西吊起来",
+        "en": "Its long arm lifts heavy things"
+      },
+      "distractors": [
+        {
+          "en": "excavator",
+          "zh": "挖掘机"
+        },
+        {
+          "en": "forklift",
+          "zh": "叉车"
+        },
+        {
+          "en": "bulldozer",
+          "zh": "推土机"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-dump-truck-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/dump-truck.webp",
+        "alt": {
+          "zh": "一辆翻斗车",
+          "en": "A dump truck"
+        },
+        "fallbackEmoji": "🚛"
+      },
+      "answer": {
+        "en": "dump truck",
+        "ipa": "/dʌmp trʌk/",
+        "zh": "翻斗车",
+        "pinyin": "fān dǒu chē"
+      },
+      "speech": {
+        "en": "dump truck",
+        "zh": "翻斗车"
+      },
+      "hint": {
+        "zh": "车斗能翘起来，把土倒出来",
+        "en": "Its bed tips up to dump the load"
+      },
+      "distractors": [
+        {
+          "en": "cement mixer",
+          "zh": "搅拌车"
+        },
+        {
+          "en": "loader",
+          "zh": "装载机"
+        },
+        {
+          "en": "truck",
+          "zh": "卡车"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-cement-mixer-006",
+      "minAge": 3,
+      "difficulty": 3,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/cement-mixer.webp",
+        "alt": {
+          "zh": "一辆混凝土搅拌车",
+          "en": "A cement mixer"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "cement mixer",
+        "ipa": "/sɪˈment ˈmɪksə/",
+        "zh": "搅拌车",
+        "pinyin": "jiǎo bàn chē"
+      },
+      "speech": {
+        "en": "cement mixer",
+        "zh": "搅拌车"
+      },
+      "hint": {
+        "zh": "后面有个大圆筒，一直转啊转",
+        "en": "A big drum keeps turning at the back"
+      },
+      "distractors": [
+        {
+          "en": "dump truck",
+          "zh": "翻斗车"
+        },
+        {
+          "en": "road roller",
+          "zh": "压路机"
+        },
+        {
+          "en": "loader",
+          "zh": "装载机"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-forklift-007",
+      "minAge": 3,
+      "difficulty": 3,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/forklift.webp",
+        "alt": {
+          "zh": "一台叉车",
+          "en": "A forklift"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "forklift",
+        "ipa": "/ˈfɔːklɪft/",
+        "zh": "叉车",
+        "pinyin": "chā chē"
+      },
+      "speech": {
+        "en": "forklift",
+        "zh": "叉车"
+      },
+      "hint": {
+        "zh": "前面有两个叉子，把货物抬起来",
+        "en": "Two forks lift the load"
+      },
+      "distractors": [
+        {
+          "en": "crane",
+          "zh": "吊车"
+        },
+        {
+          "en": "loader",
+          "zh": "装载机"
+        },
+        {
+          "en": "excavator",
+          "zh": "挖掘机"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    },
+    {
+      "id": "construction-loader-008",
+      "minAge": 3,
+      "difficulty": 3,
+      "media": {
+        "type": "image",
+        "src": "assets/construction/loader.webp",
+        "alt": {
+          "zh": "一台装载机",
+          "en": "A loader"
+        },
+        "fallbackEmoji": "🚧"
+      },
+      "answer": {
+        "en": "loader",
+        "ipa": "/ˈləʊdə/",
+        "zh": "装载机",
+        "pinyin": "zhuāng zài jī"
+      },
+      "speech": {
+        "en": "loader",
+        "zh": "装载机"
+      },
+      "hint": {
+        "zh": "前面一个大铲子，把土装到车上",
+        "en": "A big scoop loads soil into trucks"
+      },
+      "distractors": [
+        {
+          "en": "excavator",
+          "zh": "挖掘机"
+        },
+        {
+          "en": "bulldozer",
+          "zh": "推土机"
+        },
+        {
+          "en": "forklift",
+          "zh": "叉车"
+        }
+      ],
+      "tags": [
+        "construction",
+        "noun"
+      ]
+    }
+  ]
+}

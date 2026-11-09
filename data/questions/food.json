@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "categoryId": "food",
+  "items": [
+    {
+      "id": "food-milk-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/food/milk.webp",
+        "alt": {
+          "zh": "一杯牛奶",
+          "en": "A glass of milk"
+        },
+        "fallbackEmoji": "🥛"
+      },
+      "answer": {
+        "en": "milk",
+        "ipa": "/mɪlk/",
+        "zh": "牛奶",
+        "pinyin": "niú nǎi"
+      },
+      "speech": {
+        "en": "milk",
+        "zh": "牛奶"
+      },
+      "hint": {
+        "zh": "白色的，睡觉前喝",
+        "en": "It is white and comes from a cow"
+      },
+      "distractors": [
+        {
+          "en": "water",
+          "zh": "水"
+        },
+        {
+          "en": "egg",
+          "zh": "鸡蛋"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun",
+        "drink"
+      ]
+    },
+    {
+      "id": "food-egg-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/food/egg.webp",
+        "alt": {
+          "zh": "一个鸡蛋",
+          "en": "An egg"
+        },
+        "fallbackEmoji": "🥚"
+      },
+      "answer": {
+        "en": "egg",
+        "ipa": "/eɡ/",
+        "zh": "鸡蛋",
+        "pinyin": "jī dàn"
+      },
+      "speech": {
+        "en": "egg",
+        "zh": "鸡蛋"
+      },
+      "hint": {
+        "zh": "母鸡下的，可以煎着吃",
+        "en": "A hen lays it and you can fry it"
+      },
+      "distractors": [
+        {
+          "en": "milk",
+          "zh": "牛奶"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        },
+        {
+          "en": "rice",
+          "zh": "米饭"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun"
+      ]
+    },
+    {
+      "id": "food-rice-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/food/rice.webp",
+        "alt": {
+          "zh": "一碗白米饭",
+          "en": "A bowl of rice"
+        },
+        "fallbackEmoji": "🍚"
+      },
+      "answer": {
+        "en": "rice",
+        "ipa": "/raɪs/",
+        "zh": "米饭",
+        "pinyin": "mǐ fàn"
+      },
+      "speech": {
+        "en": "rice",
+        "zh": "米饭"
+      },
+      "hint": {
+        "zh": "白白的，一小粒一小粒",
+        "en": "It is white and made of little grains"
+      },
+      "distractors": [
+        {
+          "en": "noodle",
+          "zh": "面条"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        },
+        {
+          "en": "egg",
+          "zh": "鸡蛋"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun"
+      ]
+    },
+    {
+      "id": "food-bread-004",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/food/bread.webp",
+        "alt": {
+          "zh": "一片面包",
+          "en": "A slice of bread"
+        },
+        "fallbackEmoji": "🍞"
+      },
+      "answer": {
+        "en": "bread",
+        "ipa": "/bred/",
+        "zh": "面包",
+        "pinyin": "miàn bāo"
+      },
+      "speech": {
+        "en": "bread",
+        "zh": "面包"
+      },
+      "hint": {
+        "zh": "软软的，早饭常吃",
+        "en": "It is soft and eaten at breakfast"
+      },
+      "distractors": [
+        {
+          "en": "cake",
+          "zh": "蛋糕"
+        },
+        {
+          "en": "cookie",
+          "zh": "饼干"
+        },
+        {
+          "en": "rice",
+          "zh": "米饭"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun"
+      ]
+    },
+    {
+      "id": "food-noodle-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/food/noodle.webp",
+        "alt": {
+          "zh": "一碗面条",
+          "en": "A bowl of noodles"
+        },
+        "fallbackEmoji": "🍜"
+      },
+      "answer": {
+        "en": "noodle",
+        "ipa": "/ˈnuːdl/",
+        "zh": "面条",
+        "pinyin": "miàn tiáo"
+      },
+      "speech": {
+        "en": "noodle",
+        "zh": "面条"
+      },
+      "hint": {
+        "zh": "长长的，用筷子夹",
+        "en": "They are long and you eat them with chopsticks"
+      },
+      "distractors": [
+        {
+          "en": "rice",
+          "zh": "米饭"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        },
+        {
+          "en": "water",
+          "zh": "水"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun"
+      ]
+    },
+    {
+      "id": "food-water-006",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/food/water.webp",
+        "alt": {
+          "zh": "一滴水",
+          "en": "A drop of water"
+        },
+        "fallbackEmoji": "💧"
+      },
+      "answer": {
+        "en": "water",
+        "ipa": "/ˈwɔːtə/",
+        "zh": "水",
+        "pinyin": "shuǐ"
+      },
+      "speech": {
+        "en": "water",
+        "zh": "水"
+      },
+      "hint": {
+        "zh": "没有颜色，每天都要喝",
+        "en": "It has no color and you drink it every day"
+      },
+      "distractors": [
+        {
+          "en": "milk",
+          "zh": "牛奶"
+        },
+        {
+          "en": "noodle",
+          "zh": "面条"
+        },
+        {
+          "en": "rice",
+          "zh": "米饭"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun",
+        "drink"
+      ]
+    },
+    {
+      "id": "food-cake-007",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/food/cake.webp",
+        "alt": {
+          "zh": "一块蛋糕",
+          "en": "A piece of cake"
+        },
+        "fallbackEmoji": "🍰"
+      },
+      "answer": {
+        "en": "cake",
+        "ipa": "/keɪk/",
+        "zh": "蛋糕",
+        "pinyin": "dàn gāo"
+      },
+      "speech": {
+        "en": "cake",
+        "zh": "蛋糕"
+      },
+      "hint": {
+        "zh": "生日的时候吃",
+        "en": "You eat it on your birthday"
+      },
+      "distractors": [
+        {
+          "en": "cookie",
+          "zh": "饼干"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        },
+        {
+          "en": "egg",
+          "zh": "鸡蛋"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun",
+        "sweet"
+      ]
+    },
+    {
+      "id": "food-cookie-008",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/food/cookie.webp",
+        "alt": {
+          "zh": "一块饼干",
+          "en": "A cookie"
+        },
+        "fallbackEmoji": "🍪"
+      },
+      "answer": {
+        "en": "cookie",
+        "ipa": "/ˈkʊki/",
+        "zh": "饼干",
+        "pinyin": "bǐng gān"
+      },
+      "speech": {
+        "en": "cookie",
+        "zh": "饼干"
+      },
+      "hint": {
+        "zh": "圆圆的，脆脆的",
+        "en": "It is round and crunchy"
+      },
+      "distractors": [
+        {
+          "en": "cake",
+          "zh": "蛋糕"
+        },
+        {
+          "en": "bread",
+          "zh": "面包"
+        },
+        {
+          "en": "milk",
+          "zh": "牛奶"
+        }
+      ],
+      "tags": [
+        "food",
+        "noun",
+        "sweet"
+      ]
+    }
+  ]
+}

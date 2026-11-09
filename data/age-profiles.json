@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "id": "toddler",
+      "label": { "zh": "2–3 岁", "en": "2–3 yrs" },
+      "hint": { "zh": "看图认词，自动翻页", "en": "Name the picture, auto-advance" },
+      "icon": "👶",
+      "minMonth": 24,
+      "maxMonth": 47,
+      "mode": "flashcard",
+      "revealDelayMs": 0,
+      "optionCount": 0,
+      "showTextBeforeReveal": true,
+      "showPinyin": false,
+      "ttsRate": 0.8,
+      "maxPerSession": 8,
+      "autoAdvanceMs": 3500,
+      "maxWordAge": 2
+    },
+    {
+      "id": "preschool",
+      "label": { "zh": "4–5 岁", "en": "4–5 yrs" },
+      "hint": { "zh": "看图猜词，3 秒揭晓", "en": "Guess the word, reveal in 3s" },
+      "icon": "🧒",
+      "minMonth": 48,
+      "maxMonth": 71,
+      "mode": "reveal",
+      "revealDelayMs": 3000,
+      "optionCount": 0,
+      "showTextBeforeReveal": false,
+      "showPinyin": true,
+      "ttsRate": 0.9,
+      "maxPerSession": 12,
+      "autoAdvanceMs": 0,
+      "maxWordAge": 4
+    },
+    {
+      "id": "school",
+      "label": { "zh": "6–8 岁", "en": "6–8 yrs" },
+      "hint": { "zh": "看图选词，5 秒倒计时", "en": "Pick the answer, 5s timer" },
+      "icon": "🎒",
+      "minMonth": 72,
+      "maxMonth": 95,
+      "mode": "quiz",
+      "revealDelayMs": 5000,
+      "optionCount": 4,
+      "showTextBeforeReveal": false,
+      "showPinyin": true,
+      "ttsRate": 1.0,
+      "maxPerSession": 20,
+      "autoAdvanceMs": 0,
+      "maxWordAge": 6
+    }
+  ]
+}

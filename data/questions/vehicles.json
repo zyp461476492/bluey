@@ -1,0 +1,577 @@
+{
+  "version": 1,
+  "categoryId": "vehicles",
+  "items": [
+    {
+      "id": "vehicles-car-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/car.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一辆红色的汽车",
+          "en": "A red car"
+        },
+        "fallbackEmoji": "🚗"
+      },
+      "answer": {
+        "en": "car",
+        "ipa": "/kɑː/",
+        "zh": "小汽车",
+        "pinyin": "xiǎo qì chē"
+      },
+      "speech": {
+        "en": "car",
+        "zh": "小汽车"
+      },
+      "hint": {
+        "zh": "它有四个轮子",
+        "en": "It has four wheels"
+      },
+      "distractors": [
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "train",
+          "zh": "火车"
+        },
+        {
+          "en": "bicycle",
+          "zh": "自行车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun"
+      ]
+    },
+    {
+      "id": "vehicles-bus-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/bus.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一辆黄色的公交车",
+          "en": "A yellow bus"
+        },
+        "fallbackEmoji": "🚌"
+      },
+      "answer": {
+        "en": "bus",
+        "ipa": "/bʌs/",
+        "zh": "公交车",
+        "pinyin": "gōng jiāo chē"
+      },
+      "speech": {
+        "en": "bus",
+        "zh": "公交车"
+      },
+      "hint": {
+        "zh": "它很长，能坐很多人",
+        "en": "It is long and carries many people"
+      },
+      "distractors": [
+        {
+          "en": "car",
+          "zh": "小汽车"
+        },
+        {
+          "en": "train",
+          "zh": "火车"
+        },
+        {
+          "en": "bicycle",
+          "zh": "自行车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun"
+      ]
+    },
+    {
+      "id": "vehicles-train-003",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/train.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一辆绿色的火车",
+          "en": "A green train"
+        },
+        "fallbackEmoji": "🚂"
+      },
+      "answer": {
+        "en": "train",
+        "ipa": "/treɪn/",
+        "zh": "火车",
+        "pinyin": "huǒ chē"
+      },
+      "speech": {
+        "en": "train",
+        "zh": "火车"
+      },
+      "hint": {
+        "zh": "它在铁轨上跑",
+        "en": "It runs on tracks"
+      },
+      "distractors": [
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "car",
+          "zh": "小汽车"
+        },
+        {
+          "en": "bicycle",
+          "zh": "自行车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun"
+      ]
+    },
+    {
+      "id": "vehicles-bicycle-004",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/bicycle.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一辆红色的自行车",
+          "en": "A red bicycle"
+        },
+        "fallbackEmoji": "🚲"
+      },
+      "answer": {
+        "en": "bicycle",
+        "ipa": "/ˈbaɪsɪkl/",
+        "zh": "自行车",
+        "pinyin": "zì xíng chē"
+      },
+      "speech": {
+        "en": "bicycle",
+        "zh": "自行车"
+      },
+      "hint": {
+        "zh": "要用力蹬才能走",
+        "en": "You pedal to make it go"
+      },
+      "distractors": [
+        {
+          "en": "car",
+          "zh": "小汽车"
+        },
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "train",
+          "zh": "火车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun"
+      ]
+    },
+    {
+      "id": "vehicles-airplane-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/airplane.webp",
+        "alt": {
+          "zh": "一架飞机",
+          "en": "An airplane"
+        },
+        "fallbackEmoji": "✈️"
+      },
+      "answer": {
+        "en": "airplane",
+        "ipa": "/ˈeəpleɪn/",
+        "zh": "飞机",
+        "pinyin": "fēi jī"
+      },
+      "speech": {
+        "en": "airplane",
+        "zh": "飞机"
+      },
+      "hint": {
+        "zh": "它在天上飞",
+        "en": "It flies in the sky"
+      },
+      "distractors": [
+        {
+          "en": "train",
+          "zh": "火车"
+        },
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "boat",
+          "zh": "船"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "sky"
+      ]
+    },
+    {
+      "id": "vehicles-boat-006",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/boat.webp",
+        "alt": {
+          "zh": "一艘帆船",
+          "en": "A sailboat"
+        },
+        "fallbackEmoji": "⛵"
+      },
+      "answer": {
+        "en": "boat",
+        "ipa": "/bəʊt/",
+        "zh": "船",
+        "pinyin": "chuán"
+      },
+      "speech": {
+        "en": "boat",
+        "zh": "船"
+      },
+      "hint": {
+        "zh": "它在水上走",
+        "en": "It travels on water"
+      },
+      "distractors": [
+        {
+          "en": "airplane",
+          "zh": "飞机"
+        },
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "car",
+          "zh": "小汽车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "water"
+      ]
+    },
+    {
+      "id": "vehicles-fire-engine-007",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/fire-engine.webp",
+        "alt": {
+          "zh": "一辆红色消防车",
+          "en": "A red fire engine"
+        },
+        "fallbackEmoji": "🚒"
+      },
+      "answer": {
+        "en": "fire engine",
+        "ipa": "/ˈfaɪər ˌendʒɪn/",
+        "zh": "消防车",
+        "pinyin": "xiāo fáng chē"
+      },
+      "speech": {
+        "en": "fire engine",
+        "zh": "消防车"
+      },
+      "hint": {
+        "zh": "红色的，会喷水救火",
+        "en": "It is red and sprays water"
+      },
+      "distractors": [
+        {
+          "en": "ambulance",
+          "zh": "救护车"
+        },
+        {
+          "en": "police car",
+          "zh": "警车"
+        },
+        {
+          "en": "bus",
+          "zh": "公交车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "emergency"
+      ]
+    },
+    {
+      "id": "vehicles-ambulance-008",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/ambulance.webp",
+        "alt": {
+          "zh": "一辆救护车",
+          "en": "An ambulance"
+        },
+        "fallbackEmoji": "🚑"
+      },
+      "answer": {
+        "en": "ambulance",
+        "ipa": "/ˈæmbjələns/",
+        "zh": "救护车",
+        "pinyin": "jiù hù chē"
+      },
+      "speech": {
+        "en": "ambulance",
+        "zh": "救护车"
+      },
+      "hint": {
+        "zh": "白色的，送病人去医院",
+        "en": "It takes sick people to hospital"
+      },
+      "distractors": [
+        {
+          "en": "fire engine",
+          "zh": "消防车"
+        },
+        {
+          "en": "police car",
+          "zh": "警车"
+        },
+        {
+          "en": "car",
+          "zh": "小汽车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "emergency"
+      ]
+    },
+    {
+      "id": "vehicles-police-car-009",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/police-car.webp",
+        "alt": {
+          "zh": "一辆警车",
+          "en": "A police car"
+        },
+        "fallbackEmoji": "🚓"
+      },
+      "answer": {
+        "en": "police car",
+        "ipa": "/pəˈliːs kɑː/",
+        "zh": "警车",
+        "pinyin": "jǐng chē"
+      },
+      "speech": {
+        "en": "police car",
+        "zh": "警车"
+      },
+      "hint": {
+        "zh": "警察开的，车顶会闪灯",
+        "en": "Police drive it and it has a flashing light"
+      },
+      "distractors": [
+        {
+          "en": "fire engine",
+          "zh": "消防车"
+        },
+        {
+          "en": "ambulance",
+          "zh": "救护车"
+        },
+        {
+          "en": "truck",
+          "zh": "卡车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "emergency"
+      ]
+    },
+    {
+      "id": "vehicles-truck-010",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/truck.webp",
+        "alt": {
+          "zh": "一辆卡车",
+          "en": "A truck"
+        },
+        "fallbackEmoji": "🚚"
+      },
+      "answer": {
+        "en": "truck",
+        "ipa": "/trʌk/",
+        "zh": "卡车",
+        "pinyin": "kǎ chē"
+      },
+      "speech": {
+        "en": "truck",
+        "zh": "卡车"
+      },
+      "hint": {
+        "zh": "后面能装很多东西",
+        "en": "It carries a lot of things"
+      },
+      "distractors": [
+        {
+          "en": "bus",
+          "zh": "公交车"
+        },
+        {
+          "en": "car",
+          "zh": "小汽车"
+        },
+        {
+          "en": "train",
+          "zh": "火车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun"
+      ]
+    },
+    {
+      "id": "vehicles-helicopter-011",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/helicopter.webp",
+        "alt": {
+          "zh": "一架直升机",
+          "en": "A helicopter"
+        },
+        "fallbackEmoji": "🚁"
+      },
+      "answer": {
+        "en": "helicopter",
+        "ipa": "/ˈhelɪkɒptə/",
+        "zh": "直升机",
+        "pinyin": "zhí shēng jī"
+      },
+      "speech": {
+        "en": "helicopter",
+        "zh": "直升机"
+      },
+      "hint": {
+        "zh": "头顶有个大螺旋桨",
+        "en": "It has a big rotor on top"
+      },
+      "distractors": [
+        {
+          "en": "airplane",
+          "zh": "飞机"
+        },
+        {
+          "en": "boat",
+          "zh": "船"
+        },
+        {
+          "en": "train",
+          "zh": "火车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "sky"
+      ]
+    },
+    {
+      "id": "vehicles-ship-012",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/vehicles/ship.webp",
+        "alt": {
+          "zh": "一艘大轮船",
+          "en": "A big ship"
+        },
+        "fallbackEmoji": "🚢"
+      },
+      "answer": {
+        "en": "ship",
+        "ipa": "/ʃɪp/",
+        "zh": "轮船",
+        "pinyin": "lún chuán"
+      },
+      "speech": {
+        "en": "ship",
+        "zh": "轮船"
+      },
+      "hint": {
+        "zh": "很大，能装很多货",
+        "en": "It is big and carries cargo"
+      },
+      "distractors": [
+        {
+          "en": "boat",
+          "zh": "船"
+        },
+        {
+          "en": "airplane",
+          "zh": "飞机"
+        },
+        {
+          "en": "bus",
+          "zh": "公交车"
+        }
+      ],
+      "tags": [
+        "vehicle",
+        "noun",
+        "water"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "categoryId": "numbers",
+  "items": [
+    {
+      "id": "numbers-one-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "数字 1", "en": "The number one" }, "fallbackEmoji": "1️⃣" },
+      "answer": { "en": "one", "ipa": "/wʌn/", "zh": "一", "pinyin": "yī" },
+      "speech": { "en": "one", "zh": "一" },
+      "hint": { "zh": "只有一根手指", "en": "Just one finger" },
+      "distractors": [ { "en": "two", "zh": "二" }, { "en": "three", "zh": "三" }, { "en": "four", "zh": "四" } ],
+      "tags": ["number", "noun"]
+    },
+    {
+      "id": "numbers-two-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "数字 2", "en": "The number two" }, "fallbackEmoji": "2️⃣" },
+      "answer": { "en": "two", "ipa": "/tuː/", "zh": "二", "pinyin": "èr" },
+      "speech": { "en": "two", "zh": "二" },
+      "hint": { "zh": "一双筷子就是这个数", "en": "A pair of chopsticks" },
+      "distractors": [ { "en": "one", "zh": "一" }, { "en": "three", "zh": "三" }, { "en": "five", "zh": "五" } ],
+      "tags": ["number", "noun"]
+    },
+    {
+      "id": "numbers-three-003",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": { "type": "emoji", "alt": { "zh": "数字 3", "en": "The number three" }, "fallbackEmoji": "3️⃣" },
+      "answer": { "en": "three", "ipa": "/θriː/", "zh": "三", "pinyin": "sān" },
+      "speech": { "en": "three", "zh": "三" },
+      "hint": { "zh": "三只小熊", "en": "Three little bears" },
+      "distractors": [ { "en": "two", "zh": "二" }, { "en": "four", "zh": "四" }, { "en": "five", "zh": "五" } ],
+      "tags": ["number", "noun"]
+    },
+    {
+      "id": "numbers-four-004",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": { "type": "emoji", "alt": { "zh": "数字 4", "en": "The number four" }, "fallbackEmoji": "4️⃣" },
+      "answer": { "en": "four", "ipa": "/fɔː/", "zh": "四", "pinyin": "sì" },
+      "speech": { "en": "four", "zh": "四" },
+      "hint": { "zh": "桌子有四条腿", "en": "A table has four legs" },
+      "distractors": [ { "en": "three", "zh": "三" }, { "en": "five", "zh": "五" }, { "en": "one", "zh": "一" } ],
+      "tags": ["number", "noun"]
+    },
+    {
+      "id": "numbers-five-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": { "type": "emoji", "alt": { "zh": "数字 5", "en": "The number five" }, "fallbackEmoji": "5️⃣" },
+      "answer": { "en": "five", "ipa": "/faɪv/", "zh": "五", "pinyin": "wǔ" },
+      "speech": { "en": "five", "zh": "五" },
+      "hint": { "zh": "一只手有五根手指", "en": "A hand has five fingers" },
+      "distractors": [ { "en": "four", "zh": "四" }, { "en": "three", "zh": "三" }, { "en": "two", "zh": "二" } ],
+      "tags": ["number", "noun"]
+    }
+  ]
+}

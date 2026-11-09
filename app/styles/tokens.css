@@ -1,0 +1,108 @@
+/* 设计令牌：颜色、字号、间距、动效时长。
+   改风格只改这里，不要在组件里写死数值。
+
+   主题：默认深色（客厅夜间为主）；<html data-theme="light"> 切浅色。
+   没设置过时跟随系统偏好。 */
+:root {
+  /* 深色（默认） */
+  --bg: #14100c;
+  --bg-soft: #1e1813;
+  --surface: #241d16;
+  --text: #f7f0e3;
+  --text-muted: #b9a992;
+  --text-dim: #7d6f5d;
+  --accent: #e8b04b;
+  --accent-ink: #241a08;
+  --focus: #ffd166;
+  --line: rgba(247, 240, 227, 0.14);
+
+  /* 卡片 */
+  --card-bg: #fdf6ec;
+  --card-shadow: none;
+  --card-border: transparent;
+  --skeleton: #f1e7d8;
+
+  /* 浮层遮罩：必须跟着主题走。
+     写死成深色的话，浅色主题下 title 用的是深色文字 → 深底深字，完全看不见 */
+  --overlay-bg: rgba(20, 16, 12, 0.94);
+
+  /* 倒计时环 */
+  --ring-track: rgba(247, 240, 227, 0.12);
+
+  /* 字号：流体缩放，一套代码适配手机到电视 */
+  --fs-answer-en: clamp(2.4rem, 8.4vmin, 6.4rem);
+  --fs-answer-ipa: clamp(0.95rem, 2.6vmin, 1.9rem);
+  --fs-answer-zh: clamp(1.9rem, 6.6vmin, 5rem);
+  --fs-pinyin: clamp(0.95rem, 2.2vmin, 1.6rem);
+  --fs-body: clamp(0.95rem, 2vmin, 1.35rem);
+  --fs-btn: clamp(1rem, 2.2vmin, 1.5rem);
+  --fs-counter: clamp(0.9rem, 1.9vmin, 1.3rem);
+
+  /* 尺寸 */
+  --ring-size: clamp(64px, 10vmin, 128px);
+  --tap-min: clamp(52px, 8vmin, 88px);
+  --safe-pad: clamp(12px, 3.2vmin, 56px);
+
+  /* 动效 */
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* 层级 */
+  --z-countdown: 10;
+  --z-overlay: 100;
+}
+
+/* 浅色 */
+:root[data-theme="light"] {
+  --bg: #faf4e9;
+  --bg-soft: #f2ebde;
+  --surface: #fffdf8;
+  --text: #2f2a22;
+  --text-muted: #6b5f4f;
+  --text-dim: #9b8d79;
+  --accent: #cf5f45;
+  --accent-ink: #fff9f4;
+  /* 焦点环用墨色而不是蓝色：蓝色描在珊瑚色按钮上很脏，而且和整盘暖色打架 */
+  --focus: #2f2a22;
+  --line: rgba(47, 42, 34, 0.16);
+
+  /* 卡片沿用图片自带的米底（#fdf6ec），否则图与卡片之间会露一个方块接缝；
+     靠描边和轻投影把卡片和页面分开 */
+  --card-bg: #fdf6ec;
+  --card-shadow: 0 10px 30px rgba(92, 70, 40, 0.12);
+  --card-border: rgba(47, 42, 34, 0.07);
+  --skeleton: #f1e8da;
+
+  --ring-track: rgba(47, 42, 34, 0.12);
+  --overlay-bg: rgba(250, 244, 233, 0.96);
+}
+
+/* 没手动选过主题时，跟随系统 */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg: #faf4e9;
+    --bg-soft: #f2ebde;
+    --surface: #fffdf8;
+    --text: #2f2a22;
+    --text-muted: #6b5f4f;
+    --text-dim: #9b8d79;
+    --accent: #cf5f45;
+    --accent-ink: #fff9f4;
+    --focus: #2f2a22;
+    --line: rgba(47, 42, 34, 0.16);
+    --card-bg: #fdf6ec;
+    --card-shadow: 0 10px 30px rgba(92, 70, 40, 0.12);
+    --card-border: rgba(47, 42, 34, 0.07);
+    --skeleton: #f1e8da;
+    --ring-track: rgba(47, 42, 34, 0.12);
+    --overlay-bg: rgba(250, 244, 233, 0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+  }
+}

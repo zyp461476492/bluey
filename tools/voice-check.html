@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>语音自检 · Bluey</title>
+<style>
+  /* 开发工具，不参与运行时。
+     直接 import 应用自己的 app/src/ui/speech.js，
+     跑的就是线上同一套逻辑，不另写一份"看起来差不多"的实现。 */
+  body {
+    margin: 0;
+    padding: 32px;
+    background: #14100c;
+    color: #f7f0e3;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin: 0 0 4px; }
+  .sub { color: #b9a992; font-size: 14px; margin-bottom: 22px; }
+
+  .grid { display: grid; grid-template-columns: 150px 1fr; gap: 8px 20px; margin-bottom: 22px; }
+  .k { color: #b9a992; }
+  .ok { color: #8fd08a; }
+  .bad { color: #e8836b; }
+
+  .btns { display: flex; gap: 10px; margin: 18px 0; flex-wrap: wrap; }
+  button {
+    padding: 10px 20px; border-radius: 999px; border: 0;
+    background: #e8b04b; color: #241a08; font: inherit; font-weight: 500; cursor: pointer;
+  }
+  button.ghost { background: #241d16; color: #f7f0e3; border: 1px solid rgba(247,240,227,.16); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid rgba(247,240,227,.12); }
+  th { color: #b9a992; font-weight: 500; }
+
+  pre {
+    background: #1b1611; border: 1px solid rgba(247,240,227,.12); border-radius: 10px;
+    padding: 14px 16px; font-size: 13px; line-height: 1.6; max-height: 320px; overflow: auto;
+    white-space: pre-wrap; color: #cfc3ae;
+  }
+  .tip { margin-top: 24px; padding: 16px 20px; border: 1px solid rgba(247,240,227,.14);
+         border-radius: 12px; color: #b9a992; font-size: 14px; }
+  .tip b { color: #f7f0e3; }
+
+  .verdict {
+    margin: 0 0 20px;
+    padding: 18px 22px;
+    border-radius: 14px;
+    font-size: 15px;
+    line-height: 1.75;
+    border: 1px solid rgba(247, 240, 227, 0.16);
+    background: #1b1611;
+    color: #cfc3ae;
+  }
+  .verdict.good { border-color: #3f7a3a; background: #16200f; color: #b9e0a8; }
+  .verdict.bad { border-color: #7a3a2f; background: #24140f; color: #f0b4a4; }
+  .verdict b { color: #fff; }
+  .verdict ol { margin: 10px 0 0; padding-left: 22px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>语音自检</h1>
+  <div class="sub">
+    跑的是应用自己那份 <code>app/src/ui/speech.js</code>。改了代码没生效先按 <b>Ctrl+Shift+R</b> 强刷。
+  </div>
+
+  <div id="verdict" class="verdict">正在检测……</div>
+
+  <div class="grid">
+    <div class="k">speechSynthesis</div><div id="supported">—</div>
+    <div class="k">语音总数</div><div id="total">—</div>
+    <div class="k">解析出的英文</div><div id="en">—</div>
+    <div class="k">解析出的中文</div><div id="zh">—</div>
+  </div>
+
+  <div class="btns">
+    <button id="runChain">跑应用完整链：cat → 猫</button>
+    <button class="ghost" id="runEn">只测英文 cat</button>
+    <button class="ghost" id="runZh">只测中文 猫</button>
+  </div>
+
+  <pre id="log">（自动检测中……）</pre>
+
+  <table>
+    <thead><tr><th>试听</th><th>语音名</th><th>lang（原始值）</th></tr></thead>
+    <tbody id="list"></tbody>
+  </table>
+
+  <div class="tip">
+    <b>为什么要装两次？</b><br>
+    Windows 有两套语音：<b>SAPI5</b>（旧）和 <b>OneCore</b>（新，Edge 与新款 Chrome 用）。
+    只装语言、不装「语音」组件的话，两套都可能没有英文。<br>
+    您这台机器：SAPI5 有 <code>Zira (en-US)</code>，但 OneCore 只有中文三个
+    （慧慧 / 康康 / 瑶瑶），所以 Chrome 里英文才不出声。<br><br>
+    <b>命令行方式</b>（需要有管理员权限的 PowerShell）：
+    <pre>Add-WindowsCapability -Online -Name "Language.Speech~~~en-US~0.0.1.0"</pre>
+    装完重启浏览器。
+  </div>
+</div>
+
+<script type="module">
+  import * as speech from '../app/src/ui/speech.js';
+
+  const el = (id) => document.getElementById(id);
+  const logEl = el('log');
+  let lines = [];
+
+  function log(msg) {
+    lines.push(msg);
+    logEl.textContent = lines.join('\n');
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  function clearLog(title) {
+    lines = ['=== ' + title + ' ==='];
+    logEl.textContent = lines.join('\n');
+  }
+
+  // ---- 基本信息 ----
+  const report = speech.getVoiceReport();
+  el('supported').innerHTML = report.supported
+    ? '<span class="ok">支持</span>'
+    : '<span class="bad">不支持</span>';
+  el('total').textContent = report.total;
+  el('en').innerHTML = report.english
+    ? '<span class="ok">' + report.english + '</span>'
+    : '<span class="bad">没找到英文语音 → 英文不会出声</span>';
+  el('zh').innerHTML = report.chinese
+    ? '<span class="ok">' + report.chinese + '</span>'
+    : '<span class="bad">没找到中文语音</span>';
+
+  // ---- 自动结论 ----
+  const verdict = el('verdict');
+
+  function setVerdict(kind, html) {
+    verdict.className = 'verdict ' + kind;
+    verdict.innerHTML = html;
+  }
+
+  const INSTALL_STEPS = `
+    <ol>
+      <li>按 <b>Win + I</b> 打开 <b>Windows 设置</b>（不是 Chrome 设置）</li>
+      <li>左侧「时间和语言」→「语言和区域」</li>
+      <li>在「首选语言」里找到 <b>英语（美国）</b> → 点右边 <b>⋯</b> → <b>语言选项</b></li>
+      <li>找到「<b>语音</b>」那一项 → 点「下载」，等它装完</li>
+      <li>回来刷新本页，再看结论</li>
+    </ol>`;
+
+  if (!report.supported) {
+    setVerdict('bad', '<b>这个浏览器不支持语音合成</b>，只能看不能说。');
+  } else if (report.total === 0) {
+    setVerdict('bad', '<b>浏览器没有拿到任何语音。</b>先试试点下面的按钮（有些浏览器需要一次点击才初始化）。');
+  } else if (!report.english) {
+    setVerdict(
+      'bad',
+      '<b>这台 Chrome 拿不到英文语音</b> —— 中文能读，英文永远不会出声。' +
+        '这不是代码问题，是系统缺英文语音包。' +
+        INSTALL_STEPS
+    );
+  } else {
+    setVerdict('good', '<b>英文语音可用：</b>' + report.english + '<br>正在试播 cat……');
+    speech.speak('cat', 'en-GB', 0.85).then((ok) => {
+      if (ok) {
+        setVerdict(
+          'good',
+          '<b>✅ 英文出声正常。</b>听到声音说明一切就绪。<br>语音：' + report.english
+        );
+        log('自动试播 cat：✅ 成功');
+      } else {
+        setVerdict(
+          'bad',
+          '<b>语音存在，但播放失败。</b>可能是浏览器还没收到用户手势，' +
+            '先点页面任意位置，再点「只测英文 cat」。<br>语音：' + report.english
+        );
+        log('自动试播 cat：❌ 失败（不一定是没语音，可能被手势策略拦了）');
+      }
+    });
+  }
+
+  // ---- 语音列表 ----
+  const rows = report.names.map((n, i) => {
+    const [name, lang] = n.split(' | ');
+    return `<tr>
+      <td><button class="ghost" data-i="${i}" style="padding:5px 12px;font-size:12px">播放</button></td>
+      <td>${name}</td><td>${lang}</td>
+    </tr>`;
+  });
+  el('list').innerHTML = rows.join('') || '<tr><td colspan="3">没有可用语音</td></tr>';
+
+  const rawVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+
+  el('list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-i]');
+    if (!btn) return;
+    const v = rawVoices[Number(btn.dataset.i)];
+    if (!v) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(/^zh/i.test(v.lang) ? '你好' : 'hello');
+      u.voice = v;
+      u.lang = v.lang;
+      u.rate = 0.9;
+      u.onstart = () => log('单条播放 onstart: ' + v.name);
+      u.onend = () => log('单条播放 onend: ' + v.name);
+      u.onerror = (ev) => log('单条播放 onerror: ' + (ev.error || '?') + ' / ' + v.name);
+      window.speechSynthesis.speak(u);
+    } catch (err) {
+      log('单条播放抛错: ' + err.message);
+    }
+  });
+
+  // ---- 用应用的代码跑 ----
+  function watch(target) {
+    // speech.js 内部不暴露事件，这里靠耗时判断：够了就打印结果
+    const t0 = performance.now();
+    target.then((ok) => {
+      log((ok ? '✅ 成功' : '❌ 失败') + '（' + Math.round(performance.now() - t0) + 'ms）');
+    });
+  }
+
+  el('runChain').onclick = () => {
+    clearLog('完整链：cat(en-GB) → 猫(zh-CN)');
+    speech.unlock();
+    watch(speech.speakAll(
+      [{ text: 'cat', lang: 'en-GB' }, { text: '猫', lang: 'zh-CN' }],
+      0.85
+    ));
+  };
+
+  el('runEn').onclick = () => {
+    clearLog('只测英文 cat（en-GB 请求）');
+    speech.unlock();
+    watch(speech.speak('cat', 'en-GB', 0.85));
+  };
+
+  el('runZh').onclick = () => {
+    clearLog('只测中文 猫（zh-CN 请求）');
+    speech.unlock();
+    watch(speech.speak('猫', 'zh-CN', 0.85));
+  };
+
+  log('语音列表原值：\n' + (report.names.join('\n') || '（空）'));
+</script>
+</body>
+</html>

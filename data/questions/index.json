@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "defaultCategory": "all",
+  "categories": [
+    {
+      "id": "animals",
+      "name": {
+        "zh": "动物",
+        "en": "Animals"
+      },
+      "icon": "🐾",
+      "file": "animals.json"
+    },
+    {
+      "id": "fruits",
+      "name": {
+        "zh": "水果",
+        "en": "Fruits"
+      },
+      "icon": "🍎",
+      "file": "fruits.json"
+    },
+    {
+      "id": "vehicles",
+      "name": {
+        "zh": "交通工具",
+        "en": "Vehicles"
+      },
+      "icon": "🚗",
+      "file": "vehicles.json"
+    },
+    {
+      "id": "construction",
+      "name": {
+        "zh": "工程车",
+        "en": "Construction"
+      },
+      "icon": "🚧",
+      "file": "construction.json"
+    },
+    {
+      "id": "body",
+      "name": {
+        "zh": "身体",
+        "en": "My Body"
+      },
+      "icon": "👁️",
+      "file": "body.json"
+    },
+    {
+      "id": "clothes",
+      "name": {
+        "zh": "衣服",
+        "en": "Clothes"
+      },
+      "icon": "👕",
+      "file": "clothes.json"
+    },
+    {
+      "id": "food",
+      "name": {
+        "zh": "食物",
+        "en": "Food"
+      },
+      "icon": "🍚",
+      "file": "food.json"
+    },
+    {
+      "id": "colors",
+      "name": {
+        "zh": "颜色",
+        "en": "Colors"
+      },
+      "icon": "🎨",
+      "file": "colors.json"
+    },
+    {
+      "id": "numbers",
+      "name": {
+        "zh": "数字",
+        "en": "Numbers"
+      },
+      "icon": "🔢",
+      "file": "numbers.json"
+    }
+  ]
+}

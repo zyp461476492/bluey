@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Bluey 猜词</title>
+<script>
+  /* 首屏防闪：在样式生效前先把已保存的主题贴到 <html> 上。
+     存储键与 src/config.js 的 STORAGE_KEYS.theme 保持一致（bluey.theme.v1）。 */
+  try {
+    var savedTheme = JSON.parse(localStorage.getItem('bluey.theme.v1'));
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="./styles/tokens.css">
+<link rel="stylesheet" href="./styles/base.css">
+<link rel="stylesheet" href="./styles/layout.css">
+<link rel="stylesheet" href="./styles/components.css">
+<link rel="stylesheet" href="./styles/tv.css">
+</head>
+<body>
+<div id="app" class="app" data-status="IDLE" data-mode="reveal">
+
+  <header class="topbar">
+    <button class="crumb-btn" id="categoryBtn" type="button">
+      <span class="crumb-icon" id="crumbIcon" aria-hidden="true"></span>
+      <span class="crumb-name" id="crumbName"></span>
+      <span class="crumb-caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="topbar-right">
+      <button class="pill-btn" id="ageBtn" type="button"></button>
+      <div class="counter" id="counter" aria-live="polite"></div>
+      <button class="icon-btn" id="settingsBtn" type="button">
+        <span aria-hidden="true">⚙</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage">
+    <button class="card" id="cardBtn" type="button">
+      <span class="skeleton" id="skeleton" aria-hidden="true"></span>
+      <img class="card-img" id="cardImg" alt="" hidden>
+      <span class="card-emoji" id="cardEmoji" aria-hidden="true" hidden></span>
+    </button>
+
+    <div class="countdown" id="countdown" aria-hidden="true">
+      <svg class="ring" viewBox="0 0 100 100">
+        <circle class="ring-track" cx="50" cy="50" r="44"></circle>
+        <circle class="ring-fill" id="ringFill" cx="50" cy="50" r="44"
+                pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"></circle>
+      </svg>
+      <span class="ring-num" id="ringNum">5</span>
+    </div>
+
+    <div class="choices" id="choices" hidden></div>
+  </main>
+
+  <section class="answer" id="answer" aria-live="polite">
+    <div class="answer-texts">
+      <span class="answer-line" id="lineEn">
+        <span class="answer-en" id="answerEn"></span>
+        <span class="answer-ipa" id="answerIpa"></span>
+      </span>
+      <span class="answer-line" id="lineZh">
+        <span class="answer-zh" id="answerZh"></span>
+        <span class="answer-pinyin" id="answerPinyin"></span>
+      </span>
+    </div>
+    <div class="answer-actions">
+      <button class="btn btn-ghost" id="speakBtn" type="button"></button>
+      <button class="btn btn-primary" id="nextBtn" type="button"></button>
+    </div>
+  </section>
+
+  <!-- 遥控器提示：只在键盘模式下显示，触摸端不占地方 -->
+  <p class="key-hint" id="keyHint" aria-hidden="true"></p>
+
+</div>
+
+<div class="sheet" id="settingsSheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-panel">
+    <div class="sheet-head">
+      <h2 class="sheet-title" id="sheetTitle"></h2>
+      <button class="icon-btn" id="sheetClose" type="button">
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+    <div class="sheet-rows" id="sheetRows"></div>
+    <p class="sheet-hint" id="sheetHint"></p>
+  </div>
+</div>
+
+<div class="overlay" id="agePicker" hidden>
+  <div class="picker-box">
+    <h2 class="picker-title" id="pickerTitle"></h2>
+    <p class="picker-hint" id="pickerHint"></p>
+    <div class="picker-list" id="pickerList"></div>
+  </div>
+</div>
+
+<div class="overlay" id="categoryPicker" hidden>
+  <div class="picker-box">
+    <h2 class="picker-title" id="catTitle"></h2>
+    <p class="picker-hint" id="catHint"></p>
+    <div class="picker-list picker-list--wide" id="catList"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="overlay-box">
+    <h2 class="overlay-title" id="overlayTitle"></h2>
+    <p class="overlay-text" id="overlayText"></p>
+    <pre class="overlay-code" id="overlayCode" hidden></pre>
+    <button class="btn btn-primary" id="overlayBtn" type="button"></button>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden data-visible="false" role="status"></div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>

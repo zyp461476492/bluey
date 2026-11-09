@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>题库总览 · Bluey</title>
+<style>
+  :root {
+    --bg: #faf4e9;
+    --surface: #fffdf8;
+    --text: #2f2a22;
+    --muted: #6b5f4f;
+    --dim: #9b8d79;
+    --line: rgba(47, 42, 34, .12);
+    --accent: #cf5f45;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 30px 34px 60px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+  }
+  header { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; margin-bottom: 6px; }
+  h1 { font-size: 21px; margin: 0; font-weight: 600; }
+  .meta { color: var(--muted); font-size: 13.5px; }
+  .bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 26px; }
+  .chip {
+    padding: 5px 13px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--muted); font-size: 13px; cursor: pointer;
+  }
+  .chip[data-on="true"] { background: var(--accent); color: #fff9f4; border-color: transparent; }
+  section { margin-bottom: 34px; }
+  h2 {
+    font-size: 15px; font-weight: 600; margin: 0 0 12px;
+    display: flex; align-items: baseline; gap: 9px;
+  }
+  h2 .n { color: var(--dim); font-weight: 400; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 13px; }
+  figure {
+    margin: 0; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 13px; overflow: hidden;
+  }
+  .thumb {
+    aspect-ratio: 1 / 1; width: 100%; object-fit: contain;
+    background: #fdf6ec; display: grid; place-items: center;
+    font-size: 52px; line-height: 1;
+  }
+  figcaption { padding: 9px 11px 11px; }
+  .en { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+  .ipa { font-size: 11.5px; color: var(--dim); margin-left: 5px; }
+  .zh { font-size: 13px; margin-top: 2px; }
+  .py { font-size: 11px; color: var(--dim); margin-left: 5px; }
+  .tag {
+    display: inline-block; margin-top: 6px; padding: 1px 7px;
+    border-radius: 999px; font-size: 10.5px; background: rgba(47,42,34,.06); color: var(--dim);
+  }
+  .tag[data-k="emoji"] { background: rgba(207,95,69,.12); color: #a8462f; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>题库总览</h1>
+  <span class="meta" id="meta">加载中…</span>
+</header>
+<div class="bar" id="bar"></div>
+<div id="body"></div>
+
+<script type="module">
+const ROOT = '../';
+
+async function main() {
+  const idx = await (await fetch(ROOT + 'data/questions/index.json', { cache: 'no-cache' })).json();
+  const cats = [];
+
+  for (const c of idx.categories) {
+    let data;
+    try {
+      data = await (await fetch(ROOT + 'data/questions/' + c.file, { cache: 'no-cache' })).json();
+    } catch (e) { continue; }
+    cats.push({ ...c, items: data.items });
+  }
+
+  const all = cats.flatMap(c => c.items.map(it => ({ ...it, cat: c })));
+  const withImg = all.filter(it => it.media.type === 'image').length;
+  const withEmoji = all.filter(it => it.media.type === 'emoji').length;
+  document.getElementById('meta').textContent =
+    `${all.length} 个词条 · ${cats.length} 个主题 · 图片 ${withImg} · emoji ${withEmoji}`;
+
+  // 主题筛选
+  const bar = document.getElementById('bar');
+  const mk = (id, label) => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.type = 'button'; b.dataset.id = id;
+    b.dataset.on = String(id === 'all');
+    b.textContent = label;
+    b.addEventListener('click', () => {
+      [...bar.children].forEach(x => x.dataset.on = String(x.dataset.id === id));
+      render(id);
+    });
+    bar.appendChild(b);
+  };
+  mk('all', '全部');
+  cats.forEach(c => mk(c.id, `${c.icon} ${c.name.zh}`));
+
+  function card(it) {
+    const fig = document.createElement('figure');
+    const m = it.media;
+    let media;
+    if (m.type === 'image') {
+      media = document.createElement('img');
+      media.className = 'thumb';
+      media.loading = 'lazy';
+      media.src = ROOT + m.src;
+      media.alt = (m.alt && (m.alt.zh || m.alt.en)) || it.answer.en;
+    } else {
+      media = document.createElement('div');
+      media.className = 'thumb';
+      media.textContent = m.fallbackEmoji || '?';
+    }
+    const cap = document.createElement('figcaption');
+    cap.innerHTML =
+      `<div><span class="en"></span><span class="ipa"></span></div>
+       <div><span class="zh"></span><span class="py"></span></div>
+       <span class="tag" data-k="${m.type}">${m.type}</span>`;
+    cap.querySelector('.en').textContent = it.answer.en;
+    cap.querySelector('.ipa').textContent = it.answer.ipa || '';
+    cap.querySelector('.zh').textContent = it.answer.zh;
+    cap.querySelector('.py').textContent = it.answer.pinyin || '';
+    fig.append(media, cap);
+    return fig;
+  }
+
+  function render(id) {
+    const host = document.getElementById('body');
+    host.textContent = '';
+    const list = id === 'all' ? cats : cats.filter(c => c.id === id);
+    for (const c of list) {
+      const sec = document.createElement('section');
+      const h2 = document.createElement('h2');
+      h2.textContent = `${c.icon} ${c.name.zh}`;
+      const n = document.createElement('span');
+      n.className = 'n';
+      const imgN = c.items.filter(it => it.media.type === 'image').length;
+      n.textContent = `${c.name.en} · ${c.items.length} 词（图 ${imgN}）`;
+      h2.appendChild(n);
+      const grid = document.createElement('div');
+      grid.className = 'grid';
+      c.items.forEach(it => grid.appendChild(card(it)));
+      sec.append(h2, grid);
+      host.appendChild(sec);
+    }
+  }
+
+  // 支持 ?cat=food 直接定位到某个主题（方便截图和分享）
+  const initialCat = (fallback) => {
+    const want = new URLSearchParams(location.search).get('cat');
+    if (!want) return 'all';
+    if (cats.some(c => c.id === want)) {
+      [...bar.children].forEach(x => x.dataset.on = String(x.dataset.id === want));
+      return want;
+    }
+    return fallback;
+  };
+
+  render(initialCat('all'));
+}
+
+main().catch(err => {
+  document.getElementById('meta').textContent = '加载失败：' + err.message;
+  console.error(err);
+});
+</script>
+</body>
+</html>

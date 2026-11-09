@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>视口自检 · Bluey</title>
+<script>
+  /* localStorage 按 origin 共享，所以在这里先写好主题，
+     iframe 加载时就已经是目标主题了（放到 body 之后写会晚于 iframe 导航）。 */
+  try {
+    var q = new URLSearchParams(location.search);
+    var th = q.get('theme');
+    if (th === 'light' || th === 'dark') {
+      localStorage.setItem('bluey.theme.v1', JSON.stringify(th));
+    }
+    var age = q.get('age');
+    if (age) localStorage.setItem('bluey.age.v1', JSON.stringify(age));
+  } catch (e) {}
+</script>
+<style>
+  /* 开发工具，不参与运行时。
+     为什么需要它：Chrome 在 Windows 上有最小窗口宽度限制（约 500px），
+     直接 --window-size=390 布局会按 504px 计算，量出来的手机效果是错的。
+     iframe 才能拿到精确的窄视口。
+
+     电视（1920×1080）不要用 iframe 测——嵌套缩放会让 media query 判断失真，
+     直接开窗口或 DevTools 设备模式看。 */
+  body {
+    margin: 0;
+    padding: 24px;
+    background: #0b0908;
+    color: #b9a992;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+  }
+  figure { margin: 0; }
+  figcaption {
+    font-size: 12px;
+    letter-spacing: .08em;
+    margin-bottom: 8px;
+    color: #7d6f5d;
+  }
+  iframe { border: 1px solid #2b241d; display: block; background: #000; }
+  .phone iframe { width: 390px; height: 844px; }
+  .landscape iframe { width: 844px; height: 390px; }
+  .tablet iframe { width: 1024px; height: 768px; }
+</style>
+</head>
+<body>
+  <figure class="phone">
+    <figcaption>手机竖屏 390 × 844</figcaption>
+    <iframe src="../app/" title="手机竖屏"></iframe>
+  </figure>
+
+  <figure class="landscape">
+    <figcaption>手机横屏 844 × 390</figcaption>
+    <iframe src="../app/" title="手机横屏"></iframe>
+  </figure>
+
+  <figure class="tablet">
+    <figcaption>平板 1024 × 768</figcaption>
+    <iframe src="../app/" title="平板"></iframe>
+  </figure>
+
+<script>
+  // 加 ?reveal=1 时自动点一下卡片，用来截"已揭晓"态
+  var autoReveal = new URLSearchParams(location.search).get('reveal') === '1';
+
+  var frames = document.querySelectorAll('iframe');
+  for (var i = 0; i < frames.length; i++) {
+    (function (frame) {
+      frame.addEventListener('load', function () {
+        if (!autoReveal) return;
+        setTimeout(function () {
+          try {
+            var btn = frame.contentDocument.getElementById('cardBtn');
+            if (btn) btn.click();
+          } catch (e) {
+            console.warn('reveal 失败', e);
+          }
+        }, 1200);
+      });
+    })(frames[i]);
+  }
+</script>
+</body>
+</html>

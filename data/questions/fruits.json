@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "categoryId": "fruits",
+  "items": [
+    {
+      "id": "fruits-apple-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/apple.webp",
+        "alt": {
+          "zh": "一个红苹果",
+          "en": "A red apple"
+        },
+        "fallbackEmoji": "🍎"
+      },
+      "answer": {
+        "en": "apple",
+        "ipa": "/ˈæpl/",
+        "zh": "苹果",
+        "pinyin": "píng guǒ"
+      },
+      "speech": {
+        "en": "apple",
+        "zh": "苹果"
+      },
+      "hint": {
+        "zh": "它是红色的，脆脆的",
+        "en": "It is red and crunchy"
+      },
+      "distractors": [
+        {
+          "en": "peach",
+          "zh": "桃子"
+        },
+        {
+          "en": "pear",
+          "zh": "梨"
+        },
+        {
+          "en": "orange",
+          "zh": "橙子"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-banana-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/banana.webp",
+        "alt": {
+          "zh": "一根黄香蕉",
+          "en": "A yellow banana"
+        },
+        "fallbackEmoji": "🍌"
+      },
+      "answer": {
+        "en": "banana",
+        "ipa": "/bəˈnɑːnə/",
+        "zh": "香蕉",
+        "pinyin": "xiāng jiāo"
+      },
+      "speech": {
+        "en": "banana",
+        "zh": "香蕉"
+      },
+      "hint": {
+        "zh": "它是黄色的，要剥皮",
+        "en": "It is yellow and you peel it"
+      },
+      "distractors": [
+        {
+          "en": "apple",
+          "zh": "苹果"
+        },
+        {
+          "en": "pear",
+          "zh": "梨"
+        },
+        {
+          "en": "peach",
+          "zh": "桃子"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-orange-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/orange.webp",
+        "alt": {
+          "zh": "一个橙子",
+          "en": "An orange"
+        },
+        "fallbackEmoji": "🍊"
+      },
+      "answer": {
+        "en": "orange",
+        "ipa": "/ˈɒrɪndʒ/",
+        "zh": "橙子",
+        "pinyin": "chéng zi"
+      },
+      "speech": {
+        "en": "orange",
+        "zh": "橙子"
+      },
+      "hint": {
+        "zh": "圆圆橙橙的，可以榨汁",
+        "en": "It is round and makes juice"
+      },
+      "distractors": [
+        {
+          "en": "apple",
+          "zh": "苹果"
+        },
+        {
+          "en": "peach",
+          "zh": "桃子"
+        },
+        {
+          "en": "grape",
+          "zh": "葡萄"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-grape-004",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/grape.webp",
+        "alt": {
+          "zh": "一串紫葡萄",
+          "en": "A bunch of grapes"
+        },
+        "fallbackEmoji": "🍇"
+      },
+      "answer": {
+        "en": "grape",
+        "ipa": "/ɡreɪp/",
+        "zh": "葡萄",
+        "pinyin": "pú táo"
+      },
+      "speech": {
+        "en": "grape",
+        "zh": "葡萄"
+      },
+      "hint": {
+        "zh": "一颗一颗的小小的",
+        "en": "They are small and round"
+      },
+      "distractors": [
+        {
+          "en": "strawberry",
+          "zh": "草莓"
+        },
+        {
+          "en": "orange",
+          "zh": "橙子"
+        },
+        {
+          "en": "apple",
+          "zh": "苹果"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-watermelon-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/watermelon.webp",
+        "alt": {
+          "zh": "一块红西瓜",
+          "en": "A slice of watermelon"
+        },
+        "fallbackEmoji": "🍉"
+      },
+      "answer": {
+        "en": "watermelon",
+        "ipa": "/ˈwɔːtəmelən/",
+        "zh": "西瓜",
+        "pinyin": "xī guā"
+      },
+      "speech": {
+        "en": "watermelon",
+        "zh": "西瓜"
+      },
+      "hint": {
+        "zh": "夏天吃，红红的很多水",
+        "en": "It is red, juicy and eaten in summer"
+      },
+      "distractors": [
+        {
+          "en": "grape",
+          "zh": "葡萄"
+        },
+        {
+          "en": "strawberry",
+          "zh": "草莓"
+        },
+        {
+          "en": "peach",
+          "zh": "桃子"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-strawberry-006",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/strawberry.webp",
+        "alt": {
+          "zh": "一颗红草莓",
+          "en": "A red strawberry"
+        },
+        "fallbackEmoji": "🍓"
+      },
+      "answer": {
+        "en": "strawberry",
+        "ipa": "/ˈstrɔːbəri/",
+        "zh": "草莓",
+        "pinyin": "cǎo méi"
+      },
+      "speech": {
+        "en": "strawberry",
+        "zh": "草莓"
+      },
+      "hint": {
+        "zh": "红红的，上面有小点点",
+        "en": "It is red with little seeds"
+      },
+      "distractors": [
+        {
+          "en": "grape",
+          "zh": "葡萄"
+        },
+        {
+          "en": "watermelon",
+          "zh": "西瓜"
+        },
+        {
+          "en": "apple",
+          "zh": "苹果"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-pear-007",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/pear.webp",
+        "alt": {
+          "zh": "一个黄绿色的梨",
+          "en": "A pear"
+        },
+        "fallbackEmoji": "🍐"
+      },
+      "answer": {
+        "en": "pear",
+        "ipa": "/peə/",
+        "zh": "梨",
+        "pinyin": "lí"
+      },
+      "speech": {
+        "en": "pear",
+        "zh": "梨"
+      },
+      "hint": {
+        "zh": "上面小下面大，很多汁",
+        "en": "It is narrow at the top and juicy"
+      },
+      "distractors": [
+        {
+          "en": "apple",
+          "zh": "苹果"
+        },
+        {
+          "en": "peach",
+          "zh": "桃子"
+        },
+        {
+          "en": "banana",
+          "zh": "香蕉"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    },
+    {
+      "id": "fruits-peach-008",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/fruits/peach.webp",
+        "alt": {
+          "zh": "一个粉色的桃子",
+          "en": "A pink peach"
+        },
+        "fallbackEmoji": "🍑"
+      },
+      "answer": {
+        "en": "peach",
+        "ipa": "/piːtʃ/",
+        "zh": "桃子",
+        "pinyin": "táo zi"
+      },
+      "speech": {
+        "en": "peach",
+        "zh": "桃子"
+      },
+      "hint": {
+        "zh": "粉粉的，毛茸茸的",
+        "en": "It is pink and fuzzy"
+      },
+      "distractors": [
+        {
+          "en": "apple",
+          "zh": "苹果"
+        },
+        {
+          "en": "pear",
+          "zh": "梨"
+        },
+        {
+          "en": "orange",
+          "zh": "橙子"
+        }
+      ],
+      "tags": [
+        "fruit",
+        "noun"
+      ]
+    }
+  ]
+}

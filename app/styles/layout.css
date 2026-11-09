@@ -1,0 +1,222 @@
+/* 布局：顶栏 / 舞台 / 答案区 三段式。
+   三端差异只在这里处理（media query 只出现在本文件与 tv.css）。 */
+
+.app {
+  display: grid;
+  /* 中间行必须写 minmax(0,1fr)：1fr 的最小值是 min-content，
+     图片的固有尺寸会把行撑开，导致整页溢出错位 */
+  /* topbar / 舞台 / 答案 / 遥控器提示条（最后一行平时 display:none，不占高度） */
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100%;
+  min-height: 100dvh;
+  padding: var(--safe-pad);
+  gap: clamp(8px, 1.6vmin, 24px);
+}
+
+/* 防止长答案把整个网格撑宽（否则手机上卡片会被挤出屏幕） */
+.app > * {
+  min-width: 0;
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: var(--tap-min);
+  padding: 0 clamp(4px, 1vmin, 16px);
+}
+
+.crumb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  min-height: clamp(34px, 5vmin, 52px);
+  padding: 0 clamp(8px, 1.4vmin, 18px);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.crumb-btn:hover {
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.crumb-icon {
+  font-size: 1.25em;
+  line-height: 1;
+}
+
+.crumb-caret {
+  /* 0.75em 时 ▾ 只有几个像素，看起来像个逗号/分隔点，容易被当成排版错误 */
+  font-size: 0.9em;
+  opacity: 0.5;
+  transform: translateY(1px);
+}
+
+.counter {
+  font-variant-numeric: tabular-nums;
+  font-size: var(--fs-counter);
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+.topbar-right {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 1.2vmin, 16px);
+}
+
+/* ---------- 舞台 ---------- */
+.stage {
+  display: grid;
+  /* 同上：卡片的图片固有高度会把 1fr 行撑开，必须允许收缩到 0 */
+  grid-template-rows: minmax(0, 1fr) auto;
+  justify-items: center;
+  align-items: center;
+  gap: clamp(10px, 2.4vmin, 40px);
+  min-height: 0;
+  min-width: 0;
+}
+
+.countdown {
+  display: grid;
+  place-items: center;
+}
+
+/* ---------- quiz 模式：倒计时挪到舞台右上角 ----------
+   选项区要占一整行，倒计时如果还在流内会把图片挤得很小 */
+.app[data-mode="quiz"] .stage {
+  position: relative;
+}
+
+.app[data-mode="quiz"] .countdown {
+  position: absolute;
+  top: 0;
+  right: 0;
+  --ring-size: clamp(48px, 6.4vmin, 84px);
+  z-index: var(--z-countdown);
+  background: var(--bg);
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+/* 卡片 + 2×2 选项 + 答案区同时在流里。
+   卡片是"高度约束的方形"（见 components.css），会自动让位，这里只调答案区。 */
+.app[data-mode="quiz"] .answer {
+  min-height: clamp(100px, 16vh, 200px);
+}
+
+/* 矮屏（手机横屏）：选项压扁一点，答案区再收 */
+@media (max-height: 560px) {
+  .app[data-mode="quiz"] .answer {
+    min-height: clamp(64px, 18vh, 110px);
+  }
+
+  .app[data-mode="quiz"] .choices {
+    width: min(96%, 900px);
+    gap: 8px;
+  }
+
+  .app[data-mode="quiz"] .choice {
+    min-height: clamp(40px, 10vh, 58px);
+    font-size: clamp(0.8rem, 2vh, 1.1rem);
+  }
+}
+
+/* ---------- flashcard 模式：2 岁档，答案区留得宽一些 ---------- */
+.app[data-mode="flashcard"] .answer {
+  min-height: clamp(140px, 26vh, 320px);
+}
+
+.app[data-mode="flashcard"][data-paused="true"] .card::after {
+  content: "⏸";
+  position: absolute;
+  right: clamp(10px, 2vmin, 28px);
+  bottom: clamp(6px, 1.6vmin, 22px);
+  font-size: clamp(18px, 3vmin, 34px);
+  opacity: 0.55;
+}
+
+/* ---------- 答案区 ----------
+   高度提前占位，用 visibility 切换（不是 display），
+   避免揭晓瞬间布局跳动导致孩子视线丢失。 */
+.answer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(12px, 3vmin, 48px);
+  min-height: clamp(132px, 24vh, 300px);
+  min-width: 0;
+  padding: 0 clamp(4px, 1.5vmin, 24px) clamp(4px, 1vmin, 16px);
+
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+
+.answer[data-visible="true"] {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- 手机竖屏：答案卡片改上下排列 ---------- */
+@media (max-width: 600px) {
+  .app {
+    padding: clamp(10px, 3vmin, 20px);
+    gap: 6px;
+  }
+
+  .stage {
+    grid-template-rows: 1fr auto;
+    gap: 8px;
+  }
+
+  .answer {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    text-align: center;
+    align-content: start;
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+
+  .answer-texts {
+    justify-content: center;
+  }
+
+  .answer-actions {
+    justify-content: center;
+  }
+}
+
+/* ---------- 平板 ---------- */
+@media (min-width: 601px) and (max-width: 1200px) {
+  .app {
+    padding: clamp(16px, 3vmin, 32px);
+  }
+}
+
+/* ---------- 手机横屏：横屏时答案区回到右侧 ---------- */
+@media (max-width: 900px) and (orientation: landscape) {
+  .answer {
+    grid-template-columns: minmax(0, 1fr) auto;
+    justify-items: stretch;
+    text-align: left;
+    min-height: clamp(88px, 22vh, 180px);
+  }
+
+  .answer-texts {
+    justify-content: flex-start;
+  }
+
+  .answer-actions {
+    justify-content: flex-end;
+  }
+}

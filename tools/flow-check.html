@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>流程自检 · Bluey</title>
+<style>
+  /* 开发工具，不参与运行时。
+     用整屏 iframe 承载 app，再用脚本驱动点击，
+     这样能稳定截到「已揭晓」「已作答」「本组完成」这些需要交互才能到达的状态。
+
+     用法：
+       flow-check.html?age=toddler
+       flow-check.html?age=preschool&flow=reveal
+       flow-check.html?age=school&flow=quiz
+       flow-check.html?age=school&flow=complete
+       flow-check.html?flow=reveal&theme=light
+
+     两个注意点：
+     1) 会把 --dur-base 改成 1ms —— headless 的虚拟时间不推进 CSS transition，
+        不改的话截图里答案会卡在半透明（布局可信、颜色不可信）。
+     2) theme / age 参数会写 localStorage 再 reload 一次。 */
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  iframe { display: block; width: 100vw; height: 100vh; border: 0; }
+</style>
+</head>
+<body>
+  <iframe id="app" src="../app/" title="应用"></iframe>
+<script>
+  var params = new URLSearchParams(location.search);
+  var flow = params.get('flow');
+  var theme = params.get('theme');
+  var age = params.get('age');
+  var cat = params.get('cat');
+  var frame = document.getElementById('app');
+  var presetApplied = false;
+
+  function wait(ms) {
+    return new Promise(function (r) { setTimeout(r, ms); });
+  }
+
+  function click(id) {
+    var node = frame.contentDocument.getElementById(id);
+    if (node) node.click();
+  }
+
+  function clickFirstChoice() {
+    var node = frame.contentDocument.querySelector('.choice');
+    if (node) node.click();
+  }
+
+  function killTransitions() {
+    try {
+      var root = frame.contentDocument.documentElement;
+      root.style.setProperty('--dur-base', '1ms');
+      root.style.setProperty('--dur-fast', '1ms');
+    } catch (e) {}
+  }
+
+  frame.addEventListener('load', function () {
+    if ((theme || age || cat) && !presetApplied) {
+      presetApplied = true;
+      try {
+        if (theme) frame.contentWindow.localStorage.setItem('bluey.theme.v1', JSON.stringify(theme));
+        if (age) frame.contentWindow.localStorage.setItem('bluey.age.v1', JSON.stringify(age));
+        if (cat) frame.contentWindow.localStorage.setItem('bluey.category.v1', JSON.stringify(cat));
+        frame.contentWindow.location.reload();
+      } catch (e) {}
+      return;
+    }
+
+    if (!flow) {
+      // 没指定流程也要关掉过渡：否则截图会拍到答案淡入的半透明中间态
+      setTimeout(killTransitions, 800);
+      return;
+    }
+
+    (async function () {
+      await wait(1300);
+      killTransitions();
+
+      if (flow === 'reveal') {
+        click('cardBtn');
+        return;
+      }
+
+      if (flow === 'quiz') {
+        clickFirstChoice();
+        return;
+      }
+
+      if (flow === 'settings') {
+        click('settingsBtn');
+        return;
+      }
+
+      if (flow === 'category') {
+        click('categoryBtn');
+        return;
+      }
+
+      if (flow === 'age') {
+        click('ageBtn');
+        return;
+      }
+
+      if (flow === 'complete') {
+        click('cardBtn');
+        await wait(400);
+        for (var i = 0; i < 20; i++) {
+          click('nextBtn');
+          await wait(500);
+          click('cardBtn');
+          await wait(250);
+        }
+      }
+    })();
+  });
+</script>
+</body>
+</html>

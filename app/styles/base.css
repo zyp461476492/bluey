@@ -1,0 +1,78 @@
+/* reset + 排版基线 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+    "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  /* 触摸端去掉双击缩放延迟带来的闪烁 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+p,
+pre {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* 焦点环：绝对不允许 outline:none —— 电视上等于遥控器完全不可用。
+   判定用两套：
+     1. :focus-visible —— 浏览器自带的启发式，鼠标点击时不触发
+     2. html[data-input="key"] —— 我们自己记的输入模式
+   为什么要有第二套：TV 浏览器里用 JS focus() 之后 :focus-visible 经常不触发，
+   焦点实际在动、但看不见，用户会以为遥控器坏了。 */
+:focus-visible,
+html[data-input="key"] :focus {
+  outline: 4px solid var(--focus);
+  outline-offset: 4px;
+}
+
+/* 鼠标/触摸模式下不要留常驻描边 */
+html[data-input="pointer"] :focus:not(:focus-visible) {
+  outline: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

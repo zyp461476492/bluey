@@ -1,0 +1,37 @@
+/* 电视专属：10-foot UI、overscan 安全区、更大的焦点环。
+   判据用屏幕尺寸 + 指针能力，不靠 UA 判断设备。 */
+
+@media (min-width: 1600px), ((pointer: none) and (min-height: 700px)) {
+  :root {
+    --ring-size: clamp(96px, 9vmin, 160px);
+    --tap-min: clamp(72px, 7vmin, 104px);
+    --fs-body: clamp(1.1rem, 1.5vmin, 1.7rem);
+    --fs-btn: clamp(1.2rem, 1.7vmin, 1.8rem);
+  }
+
+  /* 电视 overscan：四周留 5%，否则边缘会被裁掉 */
+  .app {
+    padding: 5vmin 5vw;
+  }
+
+  .counter {
+    letter-spacing: 0.1em;
+  }
+
+  /* 遥控器没有鼠标悬浮，焦点环要更粗更亮才看得出来 */
+  :focus-visible {
+    outline-width: 6px;
+    outline-offset: 6px;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}
+
+/* 电视上禁用 hover 相关的视觉反馈，避免焦点与 hover 混淆 */
+@media (hover: none) {
+  .btn-primary:hover {
+    background: var(--accent);
+  }
+}

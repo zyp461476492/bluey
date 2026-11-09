@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "categoryId": "colors",
+  "items": [
+    {
+      "id": "colors-red-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "一个红色的圆", "en": "A red circle" }, "fallbackEmoji": "🔴" },
+      "answer": { "en": "red", "ipa": "/red/", "zh": "红色", "pinyin": "hóng sè" },
+      "speech": { "en": "red", "zh": "红色" },
+      "hint": { "zh": "苹果和消防车是这个颜色", "en": "Apples and fire engines are this color" },
+      "distractors": [ { "en": "blue", "zh": "蓝色" }, { "en": "yellow", "zh": "黄色" }, { "en": "green", "zh": "绿色" } ],
+      "tags": ["color", "adj"]
+    },
+    {
+      "id": "colors-blue-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "一个蓝色的圆", "en": "A blue circle" }, "fallbackEmoji": "🔵" },
+      "answer": { "en": "blue", "ipa": "/bluː/", "zh": "蓝色", "pinyin": "lán sè" },
+      "speech": { "en": "blue", "zh": "蓝色" },
+      "hint": { "zh": "天空是这个颜色", "en": "The sky is this color" },
+      "distractors": [ { "en": "red", "zh": "红色" }, { "en": "green", "zh": "绿色" }, { "en": "yellow", "zh": "黄色" } ],
+      "tags": ["color", "adj"]
+    },
+    {
+      "id": "colors-yellow-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "一个黄色的圆", "en": "A yellow circle" }, "fallbackEmoji": "🟡" },
+      "answer": { "en": "yellow", "ipa": "/ˈjeləʊ/", "zh": "黄色", "pinyin": "huáng sè" },
+      "speech": { "en": "yellow", "zh": "黄色" },
+      "hint": { "zh": "香蕉和太阳是这个颜色", "en": "Bananas and the sun are this color" },
+      "distractors": [ { "en": "red", "zh": "红色" }, { "en": "blue", "zh": "蓝色" }, { "en": "green", "zh": "绿色" } ],
+      "tags": ["color", "adj"]
+    },
+    {
+      "id": "colors-green-004",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": { "type": "emoji", "alt": { "zh": "一个绿色的圆", "en": "A green circle" }, "fallbackEmoji": "🟢" },
+      "answer": { "en": "green", "ipa": "/ɡriːn/", "zh": "绿色", "pinyin": "lǜ sè" },
+      "speech": { "en": "green", "zh": "绿色" },
+      "hint": { "zh": "树叶是这个颜色", "en": "Leaves are this color" },
+      "distractors": [ { "en": "yellow", "zh": "黄色" }, { "en": "blue", "zh": "蓝色" }, { "en": "red", "zh": "红色" } ],
+      "tags": ["color", "adj"]
+    }
+  ]
+}

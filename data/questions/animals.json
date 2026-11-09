@@ -1,0 +1,540 @@
+{
+  "version": 1,
+  "categoryId": "animals",
+  "items": [
+    {
+      "id": "animals-cat-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/cat.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只橘色的猫",
+          "en": "An orange cat"
+        },
+        "fallbackEmoji": "🐱"
+      },
+      "answer": {
+        "en": "cat",
+        "ipa": "/kæt/",
+        "zh": "猫",
+        "pinyin": "māo"
+      },
+      "speech": {
+        "en": "cat",
+        "zh": "猫"
+      },
+      "hint": {
+        "zh": "它会喵喵叫",
+        "en": "It says meow"
+      },
+      "distractors": [
+        {
+          "en": "dog",
+          "zh": "狗"
+        },
+        {
+          "en": "pig",
+          "zh": "猪"
+        },
+        {
+          "en": "rabbit",
+          "zh": "兔子"
+        }
+      ],
+      "tags": [
+        "pet",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-dog-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/dog.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只棕色的狗",
+          "en": "A brown dog"
+        },
+        "fallbackEmoji": "🐶"
+      },
+      "answer": {
+        "en": "dog",
+        "ipa": "/dɒɡ/",
+        "zh": "狗",
+        "pinyin": "gǒu"
+      },
+      "speech": {
+        "en": "dog",
+        "zh": "狗"
+      },
+      "hint": {
+        "zh": "它会汪汪叫",
+        "en": "It says woof"
+      },
+      "distractors": [
+        {
+          "en": "cat",
+          "zh": "猫"
+        },
+        {
+          "en": "pig",
+          "zh": "猪"
+        },
+        {
+          "en": "duck",
+          "zh": "鸭子"
+        }
+      ],
+      "tags": [
+        "pet",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-rabbit-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/rabbit.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只白色的兔子",
+          "en": "A white rabbit"
+        },
+        "fallbackEmoji": "🐰"
+      },
+      "answer": {
+        "en": "rabbit",
+        "ipa": "/ˈræbɪt/",
+        "zh": "兔子",
+        "pinyin": "tù zi"
+      },
+      "speech": {
+        "en": "rabbit",
+        "zh": "兔子"
+      },
+      "hint": {
+        "zh": "它有长长的耳朵",
+        "en": "It has long ears"
+      },
+      "distractors": [
+        {
+          "en": "cat",
+          "zh": "猫"
+        },
+        {
+          "en": "duck",
+          "zh": "鸭子"
+        },
+        {
+          "en": "bird",
+          "zh": "鸟"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-elephant-004",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/elephant.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只蓝色的大象",
+          "en": "A blue elephant"
+        },
+        "fallbackEmoji": "🐘"
+      },
+      "answer": {
+        "en": "elephant",
+        "ipa": "/ˈelɪfənt/",
+        "zh": "大象",
+        "pinyin": "dà xiàng"
+      },
+      "speech": {
+        "en": "elephant",
+        "zh": "大象"
+      },
+      "hint": {
+        "zh": "它有长长的鼻子",
+        "en": "It has a long trunk"
+      },
+      "distractors": [
+        {
+          "en": "pig",
+          "zh": "猪"
+        },
+        {
+          "en": "dog",
+          "zh": "狗"
+        },
+        {
+          "en": "bird",
+          "zh": "鸟"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun",
+        "big"
+      ]
+    },
+    {
+      "id": "animals-fish-005",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/fish.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一条红色的鱼",
+          "en": "A red fish"
+        },
+        "fallbackEmoji": "🐟"
+      },
+      "answer": {
+        "en": "fish",
+        "ipa": "/fɪʃ/",
+        "zh": "鱼",
+        "pinyin": "yú"
+      },
+      "speech": {
+        "en": "fish",
+        "zh": "鱼"
+      },
+      "hint": {
+        "zh": "它住在水里",
+        "en": "It lives in water"
+      },
+      "distractors": [
+        {
+          "en": "bird",
+          "zh": "鸟"
+        },
+        {
+          "en": "duck",
+          "zh": "鸭子"
+        },
+        {
+          "en": "rabbit",
+          "zh": "兔子"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-bird-006",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/bird.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只蓝色的小鸟",
+          "en": "A little blue bird"
+        },
+        "fallbackEmoji": "🐦"
+      },
+      "answer": {
+        "en": "bird",
+        "ipa": "/bɜːd/",
+        "zh": "鸟",
+        "pinyin": "niǎo"
+      },
+      "speech": {
+        "en": "bird",
+        "zh": "鸟"
+      },
+      "hint": {
+        "zh": "它会在天上飞",
+        "en": "It can fly"
+      },
+      "distractors": [
+        {
+          "en": "duck",
+          "zh": "鸭子"
+        },
+        {
+          "en": "fish",
+          "zh": "鱼"
+        },
+        {
+          "en": "rabbit",
+          "zh": "兔子"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-duck-007",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/duck.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只黄色的鸭子",
+          "en": "A yellow duck"
+        },
+        "fallbackEmoji": "🦆"
+      },
+      "answer": {
+        "en": "duck",
+        "ipa": "/dʌk/",
+        "zh": "鸭子",
+        "pinyin": "yā zi"
+      },
+      "speech": {
+        "en": "duck",
+        "zh": "鸭子"
+      },
+      "hint": {
+        "zh": "它会嘎嘎叫",
+        "en": "It says quack"
+      },
+      "distractors": [
+        {
+          "en": "bird",
+          "zh": "鸟"
+        },
+        {
+          "en": "fish",
+          "zh": "鱼"
+        },
+        {
+          "en": "pig",
+          "zh": "猪"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-pig-008",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/pig.webp",
+        "source": "ai",
+        "credit": null,
+        "provisional": false,
+        "alt": {
+          "zh": "一只粉色的猪",
+          "en": "A pink pig"
+        },
+        "fallbackEmoji": "🐷"
+      },
+      "answer": {
+        "en": "pig",
+        "ipa": "/pɪɡ/",
+        "zh": "猪",
+        "pinyin": "zhū"
+      },
+      "speech": {
+        "en": "pig",
+        "zh": "猪"
+      },
+      "hint": {
+        "zh": "它有卷卷的尾巴",
+        "en": "It has a curly tail"
+      },
+      "distractors": [
+        {
+          "en": "dog",
+          "zh": "狗"
+        },
+        {
+          "en": "rabbit",
+          "zh": "兔子"
+        },
+        {
+          "en": "elephant",
+          "zh": "大象"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "animals-cow-009",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/cow.webp",
+        "alt": {
+          "zh": "一头奶牛",
+          "en": "A cow"
+        },
+        "fallbackEmoji": "🐄"
+      },
+      "answer": {
+        "en": "cow",
+        "ipa": "/kaʊ/",
+        "zh": "奶牛",
+        "pinyin": "nǎi niú"
+      },
+      "speech": {
+        "en": "cow",
+        "zh": "奶牛"
+      },
+      "hint": {
+        "zh": "它给我们牛奶",
+        "en": "It gives us milk"
+      },
+      "distractors": [
+        {
+          "en": "pig",
+          "zh": "猪"
+        },
+        {
+          "en": "sheep",
+          "zh": "绵羊"
+        },
+        {
+          "en": "horse",
+          "zh": "马"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun",
+        "farm"
+      ]
+    },
+    {
+      "id": "animals-sheep-010",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/sheep.webp",
+        "alt": {
+          "zh": "一只绵羊",
+          "en": "A sheep"
+        },
+        "fallbackEmoji": "🐑"
+      },
+      "answer": {
+        "en": "sheep",
+        "ipa": "/ʃiːp/",
+        "zh": "绵羊",
+        "pinyin": "mián yáng"
+      },
+      "speech": {
+        "en": "sheep",
+        "zh": "绵羊"
+      },
+      "hint": {
+        "zh": "身上毛茸茸的",
+        "en": "Its body is covered with wool"
+      },
+      "distractors": [
+        {
+          "en": "cow",
+          "zh": "奶牛"
+        },
+        {
+          "en": "horse",
+          "zh": "马"
+        },
+        {
+          "en": "pig",
+          "zh": "猪"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun",
+        "farm"
+      ]
+    },
+    {
+      "id": "animals-horse-011",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/animals/horse.webp",
+        "alt": {
+          "zh": "一匹马",
+          "en": "A horse"
+        },
+        "fallbackEmoji": "🐴"
+      },
+      "answer": {
+        "en": "horse",
+        "ipa": "/hɔːs/",
+        "zh": "马",
+        "pinyin": "mǎ"
+      },
+      "speech": {
+        "en": "horse",
+        "zh": "马"
+      },
+      "hint": {
+        "zh": "可以骑着跑",
+        "en": "You can ride it"
+      },
+      "distractors": [
+        {
+          "en": "cow",
+          "zh": "奶牛"
+        },
+        {
+          "en": "sheep",
+          "zh": "绵羊"
+        },
+        {
+          "en": "dog",
+          "zh": "狗"
+        }
+      ],
+      "tags": [
+        "animal",
+        "noun",
+        "farm"
+      ]
+    }
+  ]
+}

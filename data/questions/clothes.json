@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "categoryId": "clothes",
+  "items": [
+    {
+      "id": "clothes-hat-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/hat.webp",
+        "alt": {
+          "zh": "一顶帽子",
+          "en": "A hat"
+        },
+        "fallbackEmoji": "👒"
+      },
+      "answer": {
+        "en": "hat",
+        "ipa": "/hæt/",
+        "zh": "帽子",
+        "pinyin": "mào zi"
+      },
+      "speech": {
+        "en": "hat",
+        "zh": "帽子"
+      },
+      "hint": {
+        "zh": "戴在头上",
+        "en": "You wear it on your head"
+      },
+      "distractors": [
+        {
+          "en": "coat",
+          "zh": "外套"
+        },
+        {
+          "en": "shirt",
+          "zh": "衬衫"
+        },
+        {
+          "en": "sock",
+          "zh": "袜子"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    },
+    {
+      "id": "clothes-shoe-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/shoe.webp",
+        "alt": {
+          "zh": "一只鞋",
+          "en": "A shoe"
+        },
+        "fallbackEmoji": "👟"
+      },
+      "answer": {
+        "en": "shoe",
+        "ipa": "/ʃuː/",
+        "zh": "鞋",
+        "pinyin": "xié"
+      },
+      "speech": {
+        "en": "shoe",
+        "zh": "鞋"
+      },
+      "hint": {
+        "zh": "穿在脚上，出门要穿",
+        "en": "You wear it on your feet"
+      },
+      "distractors": [
+        {
+          "en": "sock",
+          "zh": "袜子"
+        },
+        {
+          "en": "pants",
+          "zh": "裤子"
+        },
+        {
+          "en": "hat",
+          "zh": "帽子"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    },
+    {
+      "id": "clothes-sock-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/sock.webp",
+        "alt": {
+          "zh": "一只袜子",
+          "en": "A sock"
+        },
+        "fallbackEmoji": "🧦"
+      },
+      "answer": {
+        "en": "sock",
+        "ipa": "/sɒk/",
+        "zh": "袜子",
+        "pinyin": "wà zi"
+      },
+      "speech": {
+        "en": "sock",
+        "zh": "袜子"
+      },
+      "hint": {
+        "zh": "穿在鞋里面",
+        "en": "You wear it inside your shoes"
+      },
+      "distractors": [
+        {
+          "en": "shoe",
+          "zh": "鞋"
+        },
+        {
+          "en": "pants",
+          "zh": "裤子"
+        },
+        {
+          "en": "shirt",
+          "zh": "衬衫"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    },
+    {
+      "id": "clothes-shirt-004",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/shirt.webp",
+        "alt": {
+          "zh": "一件衬衫",
+          "en": "A shirt"
+        },
+        "fallbackEmoji": "👕"
+      },
+      "answer": {
+        "en": "shirt",
+        "ipa": "/ʃɜːt/",
+        "zh": "衬衫",
+        "pinyin": "chèn shān"
+      },
+      "speech": {
+        "en": "shirt",
+        "zh": "衬衫"
+      },
+      "hint": {
+        "zh": "穿在身上，有袖子",
+        "en": "It has sleeves and covers your body"
+      },
+      "distractors": [
+        {
+          "en": "coat",
+          "zh": "外套"
+        },
+        {
+          "en": "pants",
+          "zh": "裤子"
+        },
+        {
+          "en": "hat",
+          "zh": "帽子"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    },
+    {
+      "id": "clothes-pants-005",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/pants.webp",
+        "alt": {
+          "zh": "一条裤子",
+          "en": "A pair of pants"
+        },
+        "fallbackEmoji": "👖"
+      },
+      "answer": {
+        "en": "pants",
+        "ipa": "/pænts/",
+        "zh": "裤子",
+        "pinyin": "kù zi"
+      },
+      "speech": {
+        "en": "pants",
+        "zh": "裤子"
+      },
+      "hint": {
+        "zh": "有两条腿",
+        "en": "It has two legs"
+      },
+      "distractors": [
+        {
+          "en": "shirt",
+          "zh": "衬衫"
+        },
+        {
+          "en": "sock",
+          "zh": "袜子"
+        },
+        {
+          "en": "shoe",
+          "zh": "鞋"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    },
+    {
+      "id": "clothes-coat-006",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/clothes/coat.webp",
+        "alt": {
+          "zh": "一件外套",
+          "en": "A coat"
+        },
+        "fallbackEmoji": "🧥"
+      },
+      "answer": {
+        "en": "coat",
+        "ipa": "/kəʊt/",
+        "zh": "外套",
+        "pinyin": "wài tào"
+      },
+      "speech": {
+        "en": "coat",
+        "zh": "外套"
+      },
+      "hint": {
+        "zh": "冷天穿在外面",
+        "en": "You wear it outside when it is cold"
+      },
+      "distractors": [
+        {
+          "en": "shirt",
+          "zh": "衬衫"
+        },
+        {
+          "en": "hat",
+          "zh": "帽子"
+        },
+        {
+          "en": "pants",
+          "zh": "裤子"
+        }
+      ],
+      "tags": [
+        "clothes",
+        "noun"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,695 @@
+/* 组件：图片卡片、倒计时环、按钮、答案文本、浮层 */
+
+/* ---------- 图片卡片 ---------- */
+.card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  /* 布局策略：高度填满所在行，宽度由 aspect-ratio 推出正方形。
+     这样无论屏幕多高、下面有几行选项，卡片都会自动让位，永不重叠。
+     之前用固定 min(54vh,74vw) 在 quiz/手机上必然溢出。 */
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  border-radius: clamp(16px, 3vmin, 40px);
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: transform var(--dur-base) var(--ease);
+}
+
+.card:disabled {
+  cursor: default;
+}
+
+/* 揭晓时图片轻微放大，给一个"答案到了"的物理感 */
+.app[data-status="ANSWER_SHOWN"] .card {
+  transform: scale(1.02);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-emoji {
+  font-size: min(34vh, 34vw, 280px);
+  line-height: 1;
+}
+
+/* 加载骨架 */
+.skeleton {
+  width: 100%;
+  height: 100%;
+  background: var(--skeleton);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    opacity: 0.8;
+  }
+  .app[data-status="ANSWER_SHOWN"] .card {
+    transform: none;
+  }
+}
+
+/* ---------- 倒计时环 ---------- */
+.countdown {
+  position: relative;
+  width: var(--ring-size);
+  height: var(--ring-size);
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: rotate(-90deg);
+}
+
+.ring-track {
+  fill: none;
+  stroke: var(--ring-track);
+  stroke-width: 6;
+}
+
+.ring-fill {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 6;
+  stroke-linecap: round;
+  /* dasharray 由 pathLength=100 归一化，配合 JS 设 stroke-dashoffset */
+  stroke-dasharray: 100;
+}
+
+.ring-num {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--ring-size) * 0.34);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap-min);
+  min-width: var(--tap-min);
+  padding: 0 clamp(18px, 3.4vmin, 44px);
+  border-radius: 999px;
+  font-size: var(--fs-btn);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-primary:hover {
+  background: #f0bd5e;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+/* 次要按钮：再听一次 */
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  gap: 0.45em;
+}
+
+.btn-ghost:hover {
+  border-color: var(--text-dim);
+}
+
+.btn-ghost[data-playing="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 顶栏图标按钮（主题切换） */
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: 999px;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text-muted);
+  transition: color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* 顶栏胶囊按钮（年龄段） */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: clamp(34px, 5vmin, 52px);
+  padding: 0 clamp(10px, 1.6vmin, 20px);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--fs-counter);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+
+.pill-btn:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+
+/* 还没选年龄档时不显示（避免顶栏出现一个空胶囊） */
+.pill-btn:empty {
+  display: none;
+}
+
+/* 年龄段选择页的卡片本身就是 surface，不加额外底板 */
+.picker-box {
+  color: var(--text);
+}
+
+/* ---------- quiz 选项 ---------- */
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1.6vmin, 20px);
+  width: min(94%, 880px);
+  justify-self: center;
+}
+
+.choice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: clamp(60px, 11vmin, 128px);
+  padding: 0 0.8em;
+  border-radius: clamp(12px, 2vmin, 24px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: clamp(1.05rem, 2.9vmin, 2.1rem);
+  transition: background-color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.choice-en {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.choice-zh {
+  font-size: 0.78em;
+  color: var(--text-muted);
+}
+
+/* 判定：正确项高亮；选错的那项只降透明度，不出现红叉 */
+.choice[data-state="correct"] {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-ink);
+}
+
+.choice[data-state="correct"] .choice-zh {
+  color: var(--accent-ink);
+  opacity: 0.75;
+}
+
+.choice[data-state="wrong"] {
+  opacity: 0.45;
+}
+
+.choice[data-state="dim"] {
+  opacity: 0.35;
+}
+
+/* ---------- 年龄段选择 ---------- */
+.picker-box {
+  width: min(820px, 100%);
+  display: grid;
+  justify-items: center;
+  gap: clamp(14px, 2.4vmin, 30px);
+  text-align: center;
+}
+
+.picker-title {
+  font-size: clamp(1.3rem, 3.4vmin, 2.2rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.picker-hint {
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+}
+
+.picker-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(10px, 1.8vmin, 22px);
+  width: 100%;
+}
+
+/* 主题多（8 个 + 全部），用 3 列网格会更紧凑 */
+.picker-list--wide .picker-item {
+  min-height: clamp(110px, 15vmin, 170px);
+  padding: clamp(12px, 1.8vmin, 22px);
+}
+
+.picker-list--wide .picker-icon {
+  font-size: clamp(1.6rem, 3.6vmin, 2.6rem);
+}
+
+.picker-item {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 0.35em;
+  min-height: clamp(150px, 22vmin, 240px);
+  padding: clamp(14px, 2.4vmin, 30px);
+  border-radius: clamp(14px, 2.4vmin, 26px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.picker-item:hover {
+  border-color: var(--text-dim);
+}
+
+.picker-item[data-current="true"] {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+
+/* 待配图的主题：看得见但点不进去，避免"点了却是空的" */
+.picker-item[data-disabled="true"] {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.picker-icon {
+  font-size: clamp(2rem, 5vmin, 3.4rem);
+  line-height: 1;
+}
+
+.picker-label {
+  font-size: clamp(1.05rem, 2.4vmin, 1.7rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.picker-hint {
+  max-width: 22em;
+}
+
+.picker-item .picker-hint {
+  font-size: clamp(0.8rem, 1.8vmin, 1.05rem);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .picker-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .picker-item {
+    min-height: auto;
+    grid-template-columns: auto 1fr;
+    justify-items: start;
+    align-items: center;
+    gap: 0.2em 0.8em;
+    text-align: left;
+  }
+
+  .picker-item .picker-hint {
+    grid-column: 2;
+  }
+}
+
+/* ---------- 答案文本 ---------- */
+.answer-texts {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.8vmin 3vmin;
+  min-width: 0;
+}
+
+/* 一行 = 英文+音标，或 中文+拼音。
+   flex: 0 0 auto 是关键：整行不允许被压窄。
+   空间不够时外层 .answer-texts 会把它整体换到下一行，
+   而不是像以前那样把「压路机」和「yā lù jī」压到互相重叠。
+   （"road roller" 这类双词答案必然触发，之前只在短词上没暴露） */
+.answer-line {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.12em 0;
+  flex: 0 0 auto;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* 中文/拼音/音标一律不收缩；只有英文允许收缩并断行，
+   因为英文单词本身可能比容器还宽（cement mixer 在手机竖屏） */
+.answer-zh,
+.answer-pinyin,
+.answer-ipa {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.answer-en {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.answer-en {
+  font-size: var(--fs-answer-en);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+/* 音标：跟着英文走，但要明显小一号、弱一档，
+   否则会和单词抢注意力 */
+.answer-ipa {
+  font-family: "Segoe UI", "Lucida Sans Unicode", "Charis SIL", "DejaVu Sans", serif;
+  font-size: var(--fs-answer-ipa);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  margin-left: clamp(6px, 1.4vmin, 18px);
+}
+
+.answer-zh {
+  font-size: var(--fs-answer-zh);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.answer-pinyin {
+  font-size: var(--fs-pinyin);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  /* 和中文之间必须留缝。这里不能用 em —— 0.4em 是相对拼音自己的小字号，
+     实际只有 5px，肉眼就是「脚jiǎo」粘成一坨。用 vmin 与音标间距同一把尺子 */
+  margin-left: clamp(6px, 1vmin, 14px);
+}
+
+.answer-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ---------- 浮层（错误 / 完成） ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 5vmin, 64px);
+  background: var(--overlay-bg);
+}
+
+.overlay-box {
+  width: min(720px, 100%);
+  display: grid;
+  justify-items: start;
+  gap: clamp(12px, 2vmin, 24px);
+  padding: clamp(24px, 4vmin, 56px);
+  border: 1px solid var(--line);
+  border-radius: clamp(16px, 2.5vmin, 28px);
+  background: var(--surface);
+}
+
+.overlay-title {
+  font-size: clamp(1.3rem, 3.4vmin, 2.2rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.overlay-text {
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+.overlay-code {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--text-dim);
+  font-size: 0.85em;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+/* ---------- 轻提示 ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(16px, 4vmin, 48px);
+  transform: translate(-50%, 12px);
+  z-index: calc(var(--z-overlay) + 1);
+  max-width: min(680px, calc(100% - 32px));
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-base) var(--ease), transform var(--dur-base) var(--ease);
+}
+
+.toast[data-visible="true"] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+
+/* ---------- 设置面板 ----------
+   手机上是从底部升起的抽屉，桌面/TV 上是居中面板。
+   每行最小高度用 --tap-min，遥控器才点得准。 */
+
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  background: rgba(18, 14, 10, 0.58);
+  padding: 0;
+}
+
+.sheet-panel {
+  width: 100%;
+  max-width: 620px;
+  max-height: 88vh;
+  overflow-y: auto;
+  display: grid;
+  gap: clamp(6px, 1.4vmin, 16px);
+  padding: clamp(16px, 3vmin, 30px);
+  background: var(--surface);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -12px 44px rgba(0, 0, 0, 0.22);
+  animation: sheet-up var(--dur-base) var(--ease);
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(18px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet-panel { animation: none; }
+}
+
+/* 桌面 / 平板 / TV：居中，四边留白，避免面板贴着电视边缘被 overscan 切掉 */
+@media (min-width: 900px) {
+  .sheet {
+    align-items: center;
+    padding: clamp(20px, 5vmin, 80px);
+  }
+  .sheet-panel {
+    border-radius: 24px;
+    max-width: 760px;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 4px;
+}
+
+.sheet-title {
+  font-size: clamp(1.1rem, 2.4vmin, 1.6rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sheet-rows {
+  display: grid;
+  gap: clamp(2px, 0.6vmin, 8px);
+}
+
+.sheet-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vmin, 24px);
+  min-height: var(--tap-min);
+  padding: 4px clamp(4px, 1vmin, 12px);
+  border-radius: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sheet-row:last-child {
+  border-bottom: none;
+}
+
+/* 可点整行：右侧显示当前值 + 箭头 */
+.sheet-row--link {
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.sheet-row--link:hover {
+  background: var(--bg-soft);
+}
+
+.sheet-label {
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.sheet-value {
+  margin-left: auto;
+  font-size: var(--fs-body);
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheet-caret {
+  font-size: 1.35em;
+  line-height: 1;
+  color: var(--text-dim);
+}
+
+/* 横向单选 */
+.seg {
+  display: inline-flex;
+  margin-left: auto;
+  padding: 4px;
+  gap: 3px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+}
+
+.seg-item {
+  min-height: clamp(34px, 4.6vmin, 52px);
+  padding: 0 clamp(10px, 1.8vmin, 22px);
+  border-radius: 999px;
+  font-size: clamp(0.85rem, 1.8vmin, 1.15rem);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+.seg-item[data-on="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.sheet-hint {
+  margin-top: clamp(4px, 1vmin, 12px);
+  font-size: clamp(0.72rem, 1.5vmin, 0.95rem);
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ---------- 遥控器提示条 ----------
+   只在键盘/遥控器模式下出现。触摸端看不到，不占视觉。 */
+
+.key-hint {
+  display: none;
+  margin: 0;
+  padding-bottom: 2px;
+  text-align: center;
+  font-size: clamp(0.7rem, 1.35vmin, 0.95rem);
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+}
+
+html[data-input="key"] .key-hint {
+  display: block;
+}
+
+.key-hint:empty {
+  display: none !important;
+}

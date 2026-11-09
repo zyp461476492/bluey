@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>遥控器路径自检 · Bluey</title>
+<style>
+  body { margin:0; padding:20px; background:#1b1712; color:#e8dfd0;
+         font-family:ui-monospace,Consolas,monospace; font-size:13px; }
+  h1 { font-size:15px; font-weight:600; margin:0 0 12px; color:#f2c14e; }
+  #frame { width:1100px; height:620px; border:1px solid #3a3129; border-radius:8px; overflow:hidden; }
+  #frame iframe { width:100%; height:100%; border:0; }
+  pre { margin-top:14px; line-height:1.7; white-space:pre-wrap; }
+  .ok { color:#7bc47f; } .bad { color:#e06c5a; } .dim { color:#8b7f6f; }
+</style>
+</head>
+<body>
+<h1>遥控器路径自检（?age=preschool）</h1>
+<div id="frame"></div>
+<pre id="log">准备中…</pre>
+
+<script>
+const params = new URLSearchParams(location.search);
+const age = params.get('age') || 'preschool';
+
+const frame = document.createElement('iframe');
+frame.id = 'app';
+document.getElementById('frame').appendChild(frame);
+
+const log = [];
+function say(s, cls) {
+  log.push(cls ? `<span class="${cls}">${s}</span>` : s);
+  document.getElementById('log').innerHTML = log.join('\n');
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+function win() { return frame.contentWindow; }
+function docIn() { return frame.contentDocument; }
+
+function status() {
+  const app = docIn().getElementById('app');
+  return app ? app.getAttribute('data-status') : '?';
+}
+
+function active() {
+  const a = docIn().activeElement;
+  if (!a || a === docIn().body) return '(无)';
+  const id = a.id ? '#' + a.id : '';
+  const cls = a.className ? '.' + String(a.className).split(' ')[0] : '';
+  const txt = (a.textContent || '').trim().slice(0, 14);
+  return `${a.tagName.toLowerCase()}${id}${cls} "${txt}"`;
+}
+
+function key(k) {
+  const w = win();
+  const d = docIn();
+  // 注意：必须先把构造函数取出来。写成 new win().KeyboardEvent(...) 会被
+  // 解析成 new (win()) 再取属性，直接抛错，整条测试就静默中断了。
+  const Ctor = w.KeyboardEvent;
+  d.dispatchEvent(new Ctor('keydown', { key: k, bubbles: true, cancelable: true }));
+}
+
+window.addEventListener('error', e => say('页面错误: ' + e.message, 'bad'));
+
+async function step(label, k, delay) {
+  say(`  · 准备 ${label}${k ? '（将按 ' + k + '）' : ''}`, 'dim');
+  if (k) {
+    try { key(k); } catch (err) { say('派发按键失败: ' + err.message, 'bad'); return; }
+  }
+  await sleep(delay || 260);
+  say(`  ${k ? '按下 [' + k + '] ' : ''}→ ${label}: status=${status()}  焦点=${active()}`);
+}
+
+(async function () {
+  win().localStorage.setItem('bluey.age.v1', JSON.stringify(age));
+  win().localStorage.setItem('bluey.category.v1', JSON.stringify('fruits'));
+  frame.src = '../app/';
+  await new Promise(r => frame.addEventListener('load', r, { once: true }));
+  await sleep(2200);
+
+  say(`初始: status=${status()}  焦点=${active()}`, 'dim');
+
+  say('\n【1】reveal 模式：Enter 立即揭晓');
+  await step('按 Enter 之后', 'Enter', 500);
+
+  say('\n【2】答案态：焦点应在"下一题"');
+  await step('检查默认焦点', null, 200);
+  await step('ArrowLeft 应移到"再听一次"', 'ArrowLeft', 200);
+  await step('ArrowRight 应回"下一题"', 'ArrowRight', 200);
+
+  say('\n【3】Enter 进入下一题');
+  await step('按 Enter 之后', 'Enter', 1600);
+
+  say('\n【4】返回键打开设置');
+  await step('按 Backspace 之后', 'Backspace', 400);
+  const sheetOpen = !docIn().getElementById('settingsSheet').hidden;
+  say(`  设置面板 ${sheetOpen ? '已打开 ✓' : '没打开 ✗'}`, sheetOpen ? 'ok' : 'bad');
+  say(`  焦点=${active()}`);
+
+  say('\n【5】设置内方向键移动');
+  await step('ArrowDown 之后', 'ArrowDown', 200);
+  await step('ArrowDown 之后', 'ArrowDown', 200);
+  await step('ArrowUp 之后', 'ArrowUp', 200);
+
+  say('\n【6】Esc 关闭设置，焦点应回原处');
+  await step('按 Escape 之后', 'Escape', 400);
+  const sheetClosed = docIn().getElementById('settingsSheet').hidden;
+  say(`  设置面板 ${sheetClosed ? '已关闭 ✓' : '仍打开 ✗'}`, sheetClosed ? 'ok' : 'bad');
+  say(`  焦点=${active()}`);
+
+  say('\n【7】quiz 模式：数字键选题');
+  win().localStorage.setItem('bluey.age.v1', JSON.stringify('school'));
+  docIn().getElementById('ageBtn').click();
+  await sleep(500);
+  const cards = docIn().querySelectorAll('#pickerList .picker-item');
+  if (cards.length) cards[2].click();   // school
+  await sleep(2200);
+  await step('等待出题后', null, 200);
+  await step('按 [3] 之后', '3', 700);
+
+  say('\n完成。', 'ok');
+})().catch(e => say('脚本出错: ' + e.message, 'bad'));
+</script>
+</body>
+</html>

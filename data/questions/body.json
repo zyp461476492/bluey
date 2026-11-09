@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "categoryId": "body",
+  "items": [
+    {
+      "id": "body-eye-001",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/eye.webp",
+        "alt": {
+          "zh": "一只眼睛",
+          "en": "An eye"
+        },
+        "fallbackEmoji": "👁️"
+      },
+      "answer": {
+        "en": "eye",
+        "ipa": "/aɪ/",
+        "zh": "眼睛",
+        "pinyin": "yǎn jing"
+      },
+      "speech": {
+        "en": "eye",
+        "zh": "眼睛"
+      },
+      "hint": {
+        "zh": "用它看东西",
+        "en": "You see with it"
+      },
+      "distractors": [
+        {
+          "en": "nose",
+          "zh": "鼻子"
+        },
+        {
+          "en": "ear",
+          "zh": "耳朵"
+        },
+        {
+          "en": "mouth",
+          "zh": "嘴巴"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-nose-002",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/nose.webp",
+        "alt": {
+          "zh": "一个鼻子",
+          "en": "A nose"
+        },
+        "fallbackEmoji": "👃"
+      },
+      "answer": {
+        "en": "nose",
+        "ipa": "/nəʊz/",
+        "zh": "鼻子",
+        "pinyin": "bí zi"
+      },
+      "speech": {
+        "en": "nose",
+        "zh": "鼻子"
+      },
+      "hint": {
+        "zh": "用它闻味道",
+        "en": "You smell with it"
+      },
+      "distractors": [
+        {
+          "en": "eye",
+          "zh": "眼睛"
+        },
+        {
+          "en": "mouth",
+          "zh": "嘴巴"
+        },
+        {
+          "en": "ear",
+          "zh": "耳朵"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-mouth-003",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/mouth.webp",
+        "alt": {
+          "zh": "一张嘴巴",
+          "en": "A mouth"
+        },
+        "fallbackEmoji": "👄"
+      },
+      "answer": {
+        "en": "mouth",
+        "ipa": "/maʊθ/",
+        "zh": "嘴巴",
+        "pinyin": "zuǐ ba"
+      },
+      "speech": {
+        "en": "mouth",
+        "zh": "嘴巴"
+      },
+      "hint": {
+        "zh": "用它吃饭说话",
+        "en": "You eat and talk with it"
+      },
+      "distractors": [
+        {
+          "en": "nose",
+          "zh": "鼻子"
+        },
+        {
+          "en": "ear",
+          "zh": "耳朵"
+        },
+        {
+          "en": "tooth",
+          "zh": "牙齿"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-ear-004",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/ear.webp",
+        "alt": {
+          "zh": "一只耳朵",
+          "en": "An ear"
+        },
+        "fallbackEmoji": "👂"
+      },
+      "answer": {
+        "en": "ear",
+        "ipa": "/ɪə/",
+        "zh": "耳朵",
+        "pinyin": "ěr duo"
+      },
+      "speech": {
+        "en": "ear",
+        "zh": "耳朵"
+      },
+      "hint": {
+        "zh": "用它听声音",
+        "en": "You hear with it"
+      },
+      "distractors": [
+        {
+          "en": "eye",
+          "zh": "眼睛"
+        },
+        {
+          "en": "nose",
+          "zh": "鼻子"
+        },
+        {
+          "en": "hair",
+          "zh": "头发"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-hand-005",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/hand.webp",
+        "alt": {
+          "zh": "一只张开的手",
+          "en": "A hand"
+        },
+        "fallbackEmoji": "✋"
+      },
+      "answer": {
+        "en": "hand",
+        "ipa": "/hænd/",
+        "zh": "手",
+        "pinyin": "shǒu"
+      },
+      "speech": {
+        "en": "hand",
+        "zh": "手"
+      },
+      "hint": {
+        "zh": "用它拿东西",
+        "en": "You hold things with it"
+      },
+      "distractors": [
+        {
+          "en": "foot",
+          "zh": "脚"
+        },
+        {
+          "en": "hair",
+          "zh": "头发"
+        },
+        {
+          "en": "tooth",
+          "zh": "牙齿"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-foot-006",
+      "minAge": 2,
+      "difficulty": 1,
+      "media": {
+        "type": "image",
+        "src": "assets/body/foot.webp",
+        "alt": {
+          "zh": "一只脚",
+          "en": "A foot"
+        },
+        "fallbackEmoji": "🦶"
+      },
+      "answer": {
+        "en": "foot",
+        "ipa": "/fʊt/",
+        "zh": "脚",
+        "pinyin": "jiǎo"
+      },
+      "speech": {
+        "en": "foot",
+        "zh": "脚"
+      },
+      "hint": {
+        "zh": "用它走路",
+        "en": "You walk with it"
+      },
+      "distractors": [
+        {
+          "en": "hand",
+          "zh": "手"
+        },
+        {
+          "en": "eye",
+          "zh": "眼睛"
+        },
+        {
+          "en": "mouth",
+          "zh": "嘴巴"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-hair-007",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/body/hair.webp",
+        "alt": {
+          "zh": "一头黑头发",
+          "en": "Black hair"
+        },
+        "fallbackEmoji": "💇"
+      },
+      "answer": {
+        "en": "hair",
+        "ipa": "/heə/",
+        "zh": "头发",
+        "pinyin": "tóu fa"
+      },
+      "speech": {
+        "en": "hair",
+        "zh": "头发"
+      },
+      "hint": {
+        "zh": "长在头顶上",
+        "en": "It grows on your head"
+      },
+      "distractors": [
+        {
+          "en": "ear",
+          "zh": "耳朵"
+        },
+        {
+          "en": "hand",
+          "zh": "手"
+        },
+        {
+          "en": "nose",
+          "zh": "鼻子"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    },
+    {
+      "id": "body-tooth-008",
+      "minAge": 2,
+      "difficulty": 2,
+      "media": {
+        "type": "image",
+        "src": "assets/body/tooth.webp",
+        "alt": {
+          "zh": "一颗白牙齿",
+          "en": "A tooth"
+        },
+        "fallbackEmoji": "🦷"
+      },
+      "answer": {
+        "en": "tooth",
+        "ipa": "/tuːθ/",
+        "zh": "牙齿",
+        "pinyin": "yá chǐ"
+      },
+      "speech": {
+        "en": "tooth",
+        "zh": "牙齿"
+      },
+      "hint": {
+        "zh": "在嘴里，用来嚼东西",
+        "en": "It is in your mouth for chewing"
+      },
+      "distractors": [
+        {
+          "en": "mouth",
+          "zh": "嘴巴"
+        },
+        {
+          "en": "nose",
+          "zh": "鼻子"
+        },
+        {
+          "en": "hand",
+          "zh": "手"
+        }
+      ],
+      "tags": [
+        "body",
+        "noun"
+      ]
+    }
+  ]
+}
